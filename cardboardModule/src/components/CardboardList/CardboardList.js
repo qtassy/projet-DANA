@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './CardboardList.module.scss';
 
 const CardboardList = () => (
@@ -8,8 +7,5 @@ const CardboardList = () => (
   </div>
 );
 
-CardboardList.propTypes = {};
-
-CardboardList.defaultProps = {};
 
 export default CardboardList;

@@ -1,7 +1,7 @@
 import './App.scss';
 import { BrowserRouter } from "react-router-dom";
 import { Route, Redirect} from "react-router-dom";
-import VirtualCardboard from './components/VirtualCarboard/VirtualCarboard';
+import VirtualCardboard from './components/VirtualCardboard/VirtualCardboard';
 import Home from './components/Home/Home';
 const App = () => (
   <BrowserRouter>
