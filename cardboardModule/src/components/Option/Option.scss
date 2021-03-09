@@ -1,0 +1,61 @@
+.option {
+    flex: 1 0 0;
+    // background-color: grey;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(148, 144, 144);
+    .emptyRoof {
+        flex: 1 0 0;
+        flex-shrink: 0;
+    }
+    .emptyFloor {
+        flex: 1 0 0;
+        flex-shrink: 0;
+    }
+    .optionContent {
+        flex-shrink: 0;
+        flex: 2 0 0;
+        display: flex;
+        flex-direction: row;
+        .emptyStart {
+            flex-grow: 1;
+        }
+        .leftLogo {
+            align-items: center;
+            justify-content: center;
+            flex: 2 0 0;
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .spaceBetween {
+            flex: 1 0 0;
+        }
+        .textContainer {
+            align-items: center;
+            justify-content: center;
+            flex: 4 0 0;
+            span {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .emptySpace {
+            flex: 5 0 0;
+        }
+        .rightLogo {
+            align-items: center;
+            justify-content: center;
+            flex: 2 0 0;
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .emptyEnd {
+            flex: 2 0 0;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+nav {
+    background-color: #FF5461;
+    svg {
+        color: white;
+    }
+    span {
+        color: white;
+    }
+}
+
+.optionList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
