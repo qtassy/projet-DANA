@@ -1,14 +1,15 @@
 import './App.scss';
 import { BrowserRouter } from "react-router-dom";
 import { Route, Redirect} from "react-router-dom";
-import VirtualCardboard from './components/VirtualCardboard/VirtualCardboard';
-import Home from './components/Home/Home';
+import MakeMyCardboards from './pages/MakeMyCardboards/MakeMyCardboards';
+import Home from './pages/Home/Home';
+
 const App = () => (
   <BrowserRouter>
     <Route exact path="/">
-      <Redirect to="/home" />
+      <Redirect to="/MakeMyCardboards"/>
     </Route>
-    <Route path="/virtualCardboard" component={VirtualCardboard} />
+    <Route path="/MakeMyCardboards" component={MakeMyCardboards} />
     <Route path="/home" component={Home} />
   
   </BrowserRouter>
