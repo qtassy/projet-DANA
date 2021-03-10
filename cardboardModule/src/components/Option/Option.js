@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Option.scss';
 
-const Option = (libelle) => (
+const Option = (props) => (
   <div className="option" >
     <div className = "emptyRoof">
     </div>
@@ -27,7 +27,7 @@ const Option = (libelle) => (
       
       <div className="textContainer">
         <span>
-          {libelle}
+          {props.libelle}
         </span>
       </div>
       

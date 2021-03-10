@@ -23,7 +23,7 @@ const MakeMyCardboards = () => (
     <div className="optionList">
       <Option libelle = "Préparer ses cartons"></Option>
       <Option libelle = "Acheter un pack de déménagement"></Option>
-      <Option></Option>
+      <Option libelle = "autre chose"></Option>
     </div>
     
   </div>
