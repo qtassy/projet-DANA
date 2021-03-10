@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './Home.module.scss';
 
 const Home = () => (
@@ -9,9 +8,5 @@ const Home = () => (
    </span>
   </div>
 );
-
-Home.propTypes = {};
-
-Home.defaultProps = {};
 
 export default Home;
