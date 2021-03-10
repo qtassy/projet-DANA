@@ -19,8 +19,8 @@ class LinkMenu extends React.Component{
 class Menu extends React.Component{
     render(){
         return(
-            <nav className="navbar navbar-expand-lg navbar-light nav-home mb-3">
-                <a className="navbar-brand" href="\#">
+            <nav className="navbar navbar-expand-lg navbar-light nav-home">
+                <a className="navbar-brand" href="/">
                     <img src={Logo} alt="logo principal Dana" width="150"/>
                 </a>
                 <ul className="navbar-nav">
