@@ -12,12 +12,17 @@ code {
     monospace;
 }
 
-/* NAV */
+/* MENU */
 .nav-home{
-  background-color: #44797B;
+  background-color: white;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* HOME */
+
+.title-home{
+  color:#FF7276;
+}
 
 .link-card, .link-card:hover{
   color:inherit;
@@ -26,4 +31,23 @@ code {
 
 .home-card{
   background-color:#FF7276;
+}
+
+.round{
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: white;
+  position: absolute;
+  top: 44%;
+  right: -15px;
+  box-shadow: 1px 1px 5px #555;
+}
+
+.arrow{
+  width: 20px;
+  height: 20px;
+  color: #FF7276;
+  position: relative;
+  top: 4px;
 }
