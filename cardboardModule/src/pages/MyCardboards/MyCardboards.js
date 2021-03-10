@@ -2,9 +2,44 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MyCardboards.scss';
 import Piece from '../../components/Piece/Piece';
-const MyCardboards = () => (
-  <div className="MyCardboards">
-    <div class="shadow-sm p-3 mb-5 bg-white rounded">
+import {httpRequest} from '../../services/httpRequestService';
+class MyCardboards extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      roomList : [
+        // {
+        //   number : 5,
+        //   name : "salon"
+        // }, 
+        // {
+        //   number : 1,
+        //   name : "cuisine"
+        // }
+      ]
+    };
+  }
+
+  componentDidMount() {
+    let data =
+    [
+      {
+      number : 5,
+      name : "salon"
+      }, 
+      {
+        number : 1,
+        name : "cuisine"
+      }
+    ];
+    this.setstate({roomList : data});
+    console.log("state: ", this.state);
+  }
+
+  render() {
+    return (
+      <div className="MyCardboards">
+    <div className="shadow-sm p-3 mb-5 bg-white rounded">
       <nav id = "pinkNavbar" className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
           <div className="navbar-brand navbar-header">
@@ -20,33 +55,65 @@ const MyCardboards = () => (
         </div>
       </nav>
     </div>
-   
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          1 of 2
-        </div>
-        <div class="col">
-          2 of 2
+    {/* <div className="d-flex justify-content-center justify-content-between">
+      <div className="container">
+        <div className="row align-items-center">
+          <Piece number = "1" roomName = "Cuisine"></Piece>
+          <Piece number = "3" roomName = "Salon"></Piece>
+          <Piece number = "2" roomName = "Chambre étage "></Piece>
+          <Piece number = "10" roomName = "grenier"></Piece>
+          <Piece number = "7" roomName = "Chambre rez-de-chaussé"></Piece>
+          <Piece number = "1" roomName = "salle de bain"></Piece>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          1 of 3
-        </div>
-        <div class="col">
-          2 of 3
-        </div>
-        <div class="col">
-          3 of 3
+    </div> */}
+
+    <div className="d-flex justify-content-center justify-content-between">
+      <div className="container">
+        <div className="row align-items-center">
+        {this.state.roomList.map((room, index) => 
+          <Piece  key={index} number = {room.number} roomName = {room.name}/>
+        )}
         </div>
       </div>
     </div>
-    {/* <div class="container">
-      <Piece></Piece>
-    </div> */}
-    
-  </div>
-);
 
+  </div>
+    );
+  }
+}
+
+const getRooms = ()=>{
+
+  // var url = "";
+
+  // let data = {
+  //   token : "qskldjqsldkjqs"
+  // }
+
+  //   var options = {
+  //       method: 'GET',
+  //       body: JSON.stringify(data),
+  //       headers: { 'Content-Type': 'application/json' }
+  //   }
+
+  // httpRequest(url, options).then((response) => {
+  //   this.setState({roomList : response});
+  // });
+
+  let data =
+  [
+    {
+    number : 5,
+    name : "salon"
+    }, 
+    {
+      number : 1,
+      name : "cuisine"
+    }
+  ];
+  this.state({roomList : data});
+  console.log("state: ", this.state);
+  
+}
 export default MyCardboards;
