@@ -1,11 +1,15 @@
 .MyCardboards {
     nav {
-        background-color: #FF5461;
+        background-color: white;
         svg {
-            color: white;
+            color: black;
         }
         span {
-            color: white;
+            color:black;
         }
+    }
+
+    .container{
+        background-color: red;
     }
 }
