@@ -4,19 +4,21 @@ import { Route, Redirect} from "react-router-dom";
 import MakeMyCardboards from './pages/MakeMyCardboards/MakeMyCardboards';
 import Home from './pages/Home/Home';
 import MyCardboards from './pages/MyCardboards/MyCardboards';
-import ListeEtiquettes from './components/Etiquettes/ListeEtiquettes';
+
+import CreateCardboard from './pages/CreateCardboard/CreateCardboard'
 
 const App = () => (
   <BrowserRouter>
     <Route exact path="/">
-      <Redirect to="/MakeMyCardboards"/>
+      <Redirect to="/MakeMyCardboards/myCardBoards"/>
     </Route>
     <Route exact path="/home" component={Home} />
 
     <Route exact path="/MakeMyCardboards" component={MakeMyCardboards} />
       <Route exact path="/MakeMyCardboards/myCardBoards" component={MyCardboards} />
-    
-    <Route exact path="/Etiquettes" component={ListeEtiquettes} />
+
+        <Route exact path="/MakeMyCardboards/CreateCardboard" component={CreateCardboard} />
+
   </BrowserRouter>
 );
 
