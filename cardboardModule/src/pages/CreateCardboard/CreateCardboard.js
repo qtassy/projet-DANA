@@ -1,8 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './CreateCardboard.scss';
+import {httpRequest} from '../../services/httpRequestService';
 
 class CreateCardboard extends React.Component{
+  constructor(props){
+    this.state = {
+    }
+    
+    
+  }
+  changeState = (libelle, value)=>{
+    this.setState(JSON.parse("{" + libelle + ":" +  value + "}"));
+  }
+
+  addCardboard(){
+    var url = "http://obiwan2.univ-brest.fr:7144/addCarton";
+
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        headers: { 'Content-Type': 'application/json' }
+    }
+
+    httpRequest(url, options).then(response=> {
+      console.log(response);
+    });
+  }
   render(){
     return(
       <div className="container">
