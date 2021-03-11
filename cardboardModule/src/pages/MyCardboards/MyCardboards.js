@@ -18,9 +18,7 @@ class MyCardboards extends React.Component {
         // }
       ]
     };
-  }
 
-  componentDidMount() {
     let data =
     [
       {
@@ -32,9 +30,11 @@ class MyCardboards extends React.Component {
         name : "cuisine"
       }
     ];
-    this.setstate({roomList : data});
+    this.state.roomList = data;
     console.log("state: ", this.state);
   }
+
+   
 
   render() {
     return (
