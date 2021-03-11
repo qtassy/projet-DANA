@@ -8,7 +8,7 @@ import MyCardboards from './pages/MyCardboards/MyCardboards';
 const App = () => (
   <BrowserRouter>
     <Route exact path="/">
-      <Redirect to="/MakeMyCardboards"/>
+      <Redirect to="/MakeMyCardboards/myCardBoards"/>
     </Route>
     <Route exact path="/home" component={Home} />
 
