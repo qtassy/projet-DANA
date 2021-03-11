@@ -67,7 +67,7 @@ class Transport extends React.Component{
                 <Jumbotron title="Le transport"/>
                 <div className="container">
                     <div className="row">
-                        <Module text="Estimer le volume grâce à notre comparateur" link="\#" />
+                        <Module text="Estimer le volume grâce à notre comparateur" link="#" />
                     </div>
                 </div>
             </>
