@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
@@ -35,7 +34,8 @@ class CreateCardboard extends React.Component{
     }
     this.getAvailableCardBoardContent();
   }
-  changeStateInt = (libelle, value)=>{
+
+  changeStateInt=(libelle, value)=>{
     if (!(!isNaN(value) && Number.isInteger(parseFloat(value))) && value !==''){
       return;
     }    
@@ -65,6 +65,7 @@ class CreateCardboard extends React.Component{
         body: JSON.stringify(this.state),
         headers: { 'Content-Type': 'application/json' }
     }
+    
 
     httpRequest(url, options).then(response=> {
       // console.log(response);
@@ -177,24 +178,30 @@ class CreateCardboard extends React.Component{
           <div className="row">
             <p className="text">Contenu du carton</p>
             {
-            this.state.choosenContentList.map((content, index) => 
-              <div className="col-3">
-                <AvailableContent  key={index} id = {content.idContenu} title = {content.descriptif}/>
-              </div>
-            )}
+            this.state.chosenContentList.map((content, key) =>{
+              return(
+                <div className="col-3" idContenu = {this.props.idContenu}  onClick= {() => this.chooseContent(key)}> 
+                  <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
+                </div>
+              )         
+              })
+            }
+
+
           </div>
         </div>
 
         <div className="row">
           {
-          this.state.availableContentList.map((content, index) =>
-          <div className="col-3"  
-          onClick={ ({index}) => console.log("index : ", {index})}
-          onClick={this.chooseContent({index})}
-          > 
-            <AvailableContent  key={index} id = {content.idContenu} title = {content.descriptif} />
-          </div>
-          )}
+            this.state.availableContentList.map((content, key) =>{
+            return(
+              <div className="col-3" onClick= {() => this.chooseContent(key)}> 
+                <AvailableContent id={key} title={content.descriptif} />
+              </div>
+            )         
+            })
+          }
+          
         </div>
         
         <div className="row text-center mt-5 mb-3">
