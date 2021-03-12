@@ -2,19 +2,62 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
-
+import AvailableContent from '../../components/AvailableContent/AvailableContent';
 class CreateCardboard extends React.Component{
   constructor(props){
+    super(props);
     this.state = {
+      numeroCarton : 12354, //int
+      pieceOrigine: null, //int
+      pieceArrive : null,//int
+      contenus : null,//int [1,*]
+      largeur : null,//double
+      hauteur : null,//double
+      longueur : null,//double
+      couleur : "",//string
+      fragile : false,//int
+      poids : null,//double
+      image : "",//data uri (string)
+      availableContentList : [
+        // {
+        //   idContenu: int, 
+        //   descriptif: string
+        // }
+      ],
+
+      choosenContentList : [
+        // {
+        //   idContenu: int, 
+        //   descriptif: string
+        // }
+      ],
+
     }
-    
-    
+    this.getAvailableCardBoardContent();
   }
-  changeState = (libelle, value)=>{
-    this.setState(JSON.parse("{" + libelle + ":" +  value + "}"));
+  changeStateInt = (libelle, value)=>{
+    if (!(!isNaN(value) && Number.isInteger(parseFloat(value))) && value !==''){
+      return;
+    }    
+    
+    let obj = {};
+    obj[libelle] = value;
+    this.setState(obj);
   }
 
-  addCardboard(){
+  changeStateBoolean = (libelle, value)=>{
+    console.log(libelle, value)  
+    let obj = {};
+    obj[libelle] =value;
+    this.setState(obj);
+  }
+  changeState = (libelle, value)=>{
+    let obj = {};
+    obj[libelle] = value;
+    this.setState(obj);
+  }
+
+  addCardboard = ()=>{
     var url = "http://obiwan2.univ-brest.fr:7144/addCarton";
 
     var options = {
@@ -24,9 +67,33 @@ class CreateCardboard extends React.Component{
     }
 
     httpRequest(url, options).then(response=> {
-      console.log(response);
+      // console.log(response);
     });
   }
+
+  getAvailableCardBoardContent = () =>{
+    let url = "http://obiwan2.univ-brest.fr:7144/contenus"
+
+    var options = {
+      method: 'GET',
+      body: null,
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    httpRequest(url, options).then(response=> {
+      let obj = {
+        availableContentList : response
+      };
+      this.setState(obj);
+    });
+  }
+
+  chooseContent = (key) =>{
+    // console.log(key)
+    // console.log(this.state);
+    this.state.choosenContentList.push(this.state.choosenContentList[key]); 
+  }
+
   render(){
     return(
       <div className="container mt-3">
@@ -54,95 +121,86 @@ class CreateCardboard extends React.Component{
 
           <div className="col-6">
             <div class="form-group">
-              <input id="input" type="number" class="form-control" placeholder="N°"/>
+              <input id="input" type="number" class="form-control" placeholder="N°" 
+              value={this.state.numeroCarton} onChange={ (e) => this.changeStateInt("numeroCarton", e.target.value)}/>
             </div>
             <div className="circles mb-2">
               <p className="font-weight-bolder mb-1">Etiquette</p>
               <div className="row mx-auto">
                 <div className="col-3">
-                  <button class="btn etiquette1 btn-circle rounded-circle"></button>
+                  <button class="btn etiquette1 btn-circle rounded-circle" onClick = { (e) => this.changeState("couleur", "rose")}></button>
                 </div>
                 <div className="col-3">
-                  <button class="btn etiquette2 btn-circle rounded-circle"></button>
+                  <button class="btn etiquette2 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "mauve")}></button>
                 </div>
                 <div className="col-3">
-                  <button class="btn etiquette3 btn-circle rounded-circle"></button>
+                  <button class="btn etiquette3 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "cyan")}></button>
                 </div>
                 <div className="col-3">
-                  <button class="btn etiquette4 btn-circle rounded-circle"></button>
+                  <button class="btn etiquette4 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "gris")}></button>
                 </div>
               </div>
             </div>
             <div class="form-group mb-0">
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck"/>
+                  <input class="form-check-input" type="checkbox" id="gridCheck"
+                    checked = {this.state.fragile}
+                   onChange = {(e) => this.changeStateBoolean("fragile", e.target.checked)}/>
                   <label class="form-check-label" for="gridCheck">Fragile</label>
               </div>
             </div>
           </div>
         </div>
         <div className="form-group mt-4">
-          <input id="input" type="text" class="form-control" placeholder="Destination"/>
+          <input id="input" type="text" class="form-control" placeholder="Destination"
+          value={this.state.pieceOrigine} onChange={ (e) => this.changeState("pieceOrigine", e.target.value)}
+          />
         </div>
         <div className="form-group mt-4">
-          <input id="input" type="text" class="form-control" placeholder="Origine"/>
+          <input id="input" type="text" class="form-control" placeholder="Origine"
+            value={this.state.pieceArrive} onChange={ (e) => this.changeState("pieceArrive", e.target.value)}
+        />
         </div>
         <div className="form-group mt-4">
-          <input id="input" type="text" class="form-control" placeholder="Taille du carton"/>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">Taille du carton en centimètres  </span>
+            </div>
+            <input type="number" class="form-control" placeholder="Longueur"
+            value={this.state.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
+            />
+            <input type="number" class="form-control" placeholder="largeur"
+            value={this.state.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
+            />
+            <input type="number" class="form-control" placeholder="hauteur"
+            value={this.state.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
+            />
+
+          </div>
         </div>
         <div className="form-group">
-          <textarea disabled class="form-control" id="text-area" placeholder="Contenu du carton" rows="3"></textarea>
+          {/* <textarea disabled class="form-control" id="text-area" placeholder="Contenu du carton" rows="3"></textarea> */}
+          <div className="row">
+            {
+            this.state.choosenContentList.map((content, index) => 
+            <AvailableContent  key={index} id = {content.idContenu} title = {content.descriptif}/>
+            )}
+          </div>
         </div>
         <div className="row">
-          <div className="col-3">
-            <button className="btn btn-content">Livres</button>
+        
+          {
+          this.state.availableContentList.map((content, index) =>
+          <div className="col-3"  
+          onClick={ ({index}) => console.log("index : ", {index})}
+          onClick={this.chooseContent({index})}
+          > 
+            <AvailableContent  key={index} id = {content.idContenu} title = {content.descriptif} />
+          
           </div>
-          <div className="col-3">
-            <button className="btn btn-content">Outils</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Vetements</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Décorations</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Cosmétique</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Serviettes</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Draps</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Ustensiles</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Vaisselle</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Torchons</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Bric à brac</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">DVD</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Electroménager</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Jeux</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">Scolaires</button>
-          </div>
-          <div className="col-3">
-            <button className="btn btn-content">CD</button>
-          </div>
+          )}
         </div>
+        
         <div className="row text-center mt-5 mb-3">
           <div className="col-6">
             <button className="btn btn-save">Enregistrer</button>
