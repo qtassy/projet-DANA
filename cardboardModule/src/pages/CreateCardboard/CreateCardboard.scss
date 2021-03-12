@@ -35,29 +35,7 @@
             }
         }
     }
-
-
 }
-
-.content {
-    position:absolute;
-    height: 100%;
-    width: 100%;
-    padding: 10% 5%;
-}
-
-.table{
-    display:table;
-    height:100%;
-    width:100%;
-}
-.table-cell{
-    display:table-cell;
-    vertical-align:middle;
-    height:100%;
-    width:100%;
-}
-
 
 #input{
     background-color: #F6F6F6;
@@ -68,12 +46,18 @@
     width: 100%;
 }
 
-#text-area{
+#cardboard-content{
     background-color: #F6F6F6;
     border-radius: 20px;
-    border: none;
     width: 100%;
-    resize: none;
+    height: 7em;
+
+    .text{
+        color: #6c757d;
+        position: relative;
+        top: 8px;
+        left: 30px;
+    }
 }
 
 .circles{
