@@ -6,7 +6,7 @@ import AvailableContent from '../../components/AvailableContent/AvailableContent
 class CreateCardboard extends React.Component{
   constructor(props){
     super(props);
-    this.state = {
+    this.state={
       numeroCarton : 12354, //int
       pieceOrigine: null, //int
       pieceArrive : null,//int
@@ -25,7 +25,7 @@ class CreateCardboard extends React.Component{
         // }
       ],
 
-      choosenContentList : [
+      chosenContentList : [
         // {
         //   idContenu: int, 
         //   descriptif: string
@@ -35,32 +35,32 @@ class CreateCardboard extends React.Component{
     }
     this.getAvailableCardBoardContent();
   }
-  changeStateInt = (libelle, value)=>{
+  changeStateInt=(libelle, value)=>{
     if (!(!isNaN(value) && Number.isInteger(parseFloat(value))) && value !==''){
       return;
     }    
     
-    let obj = {};
-    obj[libelle] = value;
+    let obj={};
+    obj[libelle]=value;
     this.setState(obj);
   }
 
-  changeStateBoolean = (libelle, value)=>{
+  changeStateBoolean=(libelle, value)=>{
     console.log(libelle, value)  
-    let obj = {};
+    let obj={};
     obj[libelle] =value;
     this.setState(obj);
   }
-  changeState = (libelle, value)=>{
-    let obj = {};
-    obj[libelle] = value;
+  changeState=(libelle, value)=>{
+    let obj={};
+    obj[libelle]=value;
     this.setState(obj);
   }
 
-  addCardboard = ()=>{
-    var url = "http://obiwan2.univ-brest.fr:7144/addCarton";
+  addCardboard=()=>{
+    var url="http://obiwan2.univ-brest.fr:7144/addCarton";
 
-    var options = {
+    var options={
         method: 'POST',
         body: JSON.stringify(this.state),
         headers: { 'Content-Type': 'application/json' }
@@ -71,27 +71,29 @@ class CreateCardboard extends React.Component{
     });
   }
 
-  getAvailableCardBoardContent = () =>{
-    let url = "http://obiwan2.univ-brest.fr:7144/contenus"
+  getAvailableCardBoardContent=() =>{
+    let url="http://obiwan2.univ-brest.fr:7144/contenus"
 
-    var options = {
+    var options={
       method: 'GET',
       body: null,
       headers: { 'Content-Type': 'application/json' }
     }
 
     httpRequest(url, options).then(response=> {
-      let obj = {
+      let obj={
         availableContentList : response
       };
       this.setState(obj);
     });
   }
 
-  chooseContent = (key) =>{
+  chooseContent=(key) =>{
     // console.log(key)
-    // console.log(this.state);
-    this.state.choosenContentList.push(this.state.choosenContentList[key]); 
+    let content = this.state.availableContentList[key];
+    // console.log("content ", content);
+    this.state.chosenContentList.push(content); 
+    console.log(this.state);
   }
 
   render(){
@@ -101,9 +103,9 @@ class CreateCardboard extends React.Component{
           <div className="col-6">
             <div className="square">
               <div className="content">
-                <div class="table">
-                  <div class="table-cell">
-                    <svg id="picture" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                <div className="table">
+                  <div className="table-cell">
+                    <svg id="picture" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-camera" viewBox="0 0 16 16">
                       <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
                       <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
                     </svg>
@@ -112,7 +114,7 @@ class CreateCardboard extends React.Component{
               </div>
             </div>
             {/* <div className="picture">
-              <svg className="icon-cam" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+              <svg className="icon-cam" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-camera" viewBox="0 0 16 16">
                 <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
                 <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
               </svg>
@@ -120,85 +122,89 @@ class CreateCardboard extends React.Component{
           </div>
 
           <div className="col-6">
-            <div class="form-group">
-              <input id="input" type="number" class="form-control" placeholder="N°" 
+            <div className="form-group">
+              <input id="input" type="number" className="form-control" placeholder="N°" 
               value={this.state.numeroCarton} onChange={ (e) => this.changeStateInt("numeroCarton", e.target.value)}/>
             </div>
             <div className="circles mb-2">
               <p className="font-weight-bolder mb-1">Etiquette</p>
               <div className="row mx-auto">
                 <div className="col-3">
-                  <button class="btn etiquette1 btn-circle rounded-circle" onClick = { (e) => this.changeState("couleur", "rose")}></button>
+                  <button className="btn etiquette1 btn-circle rounded-circle" onClick={(e) => this.changeState("couleur", "rose")}></button>
                 </div>
                 <div className="col-3">
-                  <button class="btn etiquette2 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "mauve")}></button>
+                  <button className="btn etiquette2 btn-circle rounded-circle"  onClick={(e) => this.changeState("couleur", "mauve")}></button>
                 </div>
                 <div className="col-3">
-                  <button class="btn etiquette3 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "cyan")}></button>
+                  <button className="btn etiquette3 btn-circle rounded-circle"  onClick={(e) => this.changeState("couleur", "cyan")}></button>
                 </div>
                 <div className="col-3">
-                  <button class="btn etiquette4 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "gris")}></button>
+                  <button className="btn etiquette4 btn-circle rounded-circle"  onClick={(e) => this.changeState("couleur", "gris")}></button>
                 </div>
               </div>
             </div>
-            <div class="form-group mb-0">
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck"
-                    checked = {this.state.fragile}
-                   onChange = {(e) => this.changeStateBoolean("fragile", e.target.checked)}/>
-                  <label class="form-check-label" for="gridCheck">Fragile</label>
+            <div className="form-group mb-0">
+              <div className="form-check">
+                  <input className="form-check-input" type="checkbox" id="gridCheck"
+                    checked={this.state.fragile}
+                   onChange={(e) => this.changeStateBoolean("fragile", e.target.checked)}/>
+                  <label className="form-check-label" for="gridCheck">Fragile</label>
               </div>
             </div>
           </div>
         </div>
         <div className="form-group mt-4">
-          <input id="input" type="text" class="form-control" placeholder="Destination"
-          value={this.state.pieceOrigine} onChange={ (e) => this.changeState("pieceOrigine", e.target.value)}
+          <input id="input" type="text" className="form-control" placeholder="Destination"
+          value={this.state.pieceOrigine} onChange={(e) => this.changeState("pieceOrigine", e.target.value)}
           />
         </div>
         <div className="form-group mt-4">
-          <input id="input" type="text" class="form-control" placeholder="Origine"
-            value={this.state.pieceArrive} onChange={ (e) => this.changeState("pieceArrive", e.target.value)}
+          <input id="input" type="text" className="form-control" placeholder="Origine"
+            value={this.state.pieceArrive} onChange={(e) => this.changeState("pieceArrive", e.target.value)}
         />
         </div>
         <div className="form-group mt-4">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="">Taille du carton en centimètres  </span>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="">Taille du carton en centimètres  </span>
             </div>
-            <input type="number" class="form-control" placeholder="Longueur"
-            value={this.state.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
+            <input type="number" className="form-control" placeholder="Longueur"
+            value={this.state.longueur} onChange={(e) => this.changeStateInt("longueur", e.target.value)}
             />
-            <input type="number" class="form-control" placeholder="largeur"
-            value={this.state.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
+            <input type="number" className="form-control" placeholder="largeur"
+            value={this.state.largeur} onChange={(e) => this.changeStateInt("largeur", e.target.value)}
             />
-            <input type="number" class="form-control" placeholder="hauteur"
-            value={this.state.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
+            <input type="number" className="form-control" placeholder="hauteur"
+            value={this.state.hauteur} onChange={(e) => this.changeStateInt("hauteur", e.target.value)}
             />
 
           </div>
         </div>
         <div className="form-group">
-          {/* <textarea disabled class="form-control" id="text-area" placeholder="Contenu du carton" rows="3"></textarea> */}
+          {/* <textarea disabled className="form-control" id="text-area" placeholder="Contenu du carton" rows="3"></textarea> */}
           <div className="row">
             {
-            this.state.choosenContentList.map((content, index) => 
-            <AvailableContent  key={index} id = {content.idContenu} title = {content.descriptif}/>
-            )}
+            this.state.chosenContentList.map((content, key) =>{
+              return(
+                <div className="col-3" idContenu = {this.props.idContenu}  onClick= {() => this.chooseContent(key)}> 
+                  <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
+                </div>
+              )         
+              })
+            }
           </div>
         </div>
         <div className="row">
         
           {
-          this.state.availableContentList.map((content, index) =>
-          <div className="col-3"  
-          onClick={ ({index}) => console.log("index : ", {index})}
-          onClick={this.chooseContent({index})}
-          > 
-            <AvailableContent  key={index} id = {content.idContenu} title = {content.descriptif} />
-          
-          </div>
-          )}
+          this.state.availableContentList.map((content, key) =>{
+            return(
+              <div className="col-3" idContenu = {this.props.idContenu}  onClick= {() => this.chooseContent(key)}> 
+                <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
+              </div>
+            )         
+            })
+          }
         </div>
         
         <div className="row text-center mt-5 mb-3">

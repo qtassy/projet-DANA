@@ -1,8 +1,19 @@
 import React from 'react';
 import './AvailableContent.scss';
 
-const AvailableContent = (props) => (
-    <button className="btn btn-content">{props.title}</button>
-);
+class AvailableContent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
+    render(){
+        return(
+            <button className="btn btn-content">{this.props.title}</button>
+        )
+    }
+}
+   
+
 
 export default AvailableContent;
