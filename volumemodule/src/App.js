@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImages } from '@fortawesome/free-solid-svg-icons'
+import Resume from './Resume';
 const fetch = require('node-fetch');
 
 class App extends React.Component {
@@ -13,6 +14,7 @@ class App extends React.Component {
       },
       categorie: ""
     }
+    this.child = null;
   }
 
   componentDidMount() {
@@ -100,7 +102,8 @@ class App extends React.Component {
     var nom = e.target.id;
     ([...liste.lstObjets]).forEach(element => {
       if (element.libelle === nom.split('-')[1]) {
-        element = element - 1;
+        element.quantite = element.quantite - 1 < 0 ? 0 : element.quantite -=1;
+        this.child.decrementer();
       }
     })
     this.setState({ listeActuelle: liste });
@@ -112,9 +115,45 @@ class App extends React.Component {
     ([...liste.lstObjets]).forEach(element => {
       if (element.libelle === nom.split('-')[1]) {
         element.quantite += 1;
+        this.child.incrementer();
       }
     })
     this.setState({ listeActuelle: liste });
+  }
+
+  setChild = element => {
+    this.child = element;
+  }
+
+  submit = (data) => {
+    this.state.recapitulatif.forEach(element => {
+      if (element.categorie === this.state.categorie) {
+        element = this.state.listeActuelle;
+      }
+    })
+    
+    var nouveauRecap = {
+      lstCategorie : []
+    };
+    var nouvelleListeObjets = [];
+    nouveauRecap.idUtilisateur = 1;
+    nouveauRecap.nbElements = data.nbElements;
+    nouveauRecap.surface = data.surface;
+    this.state.recapitulatif.forEach(element => {
+      ([...element.lstObjets]).forEach(objet => {
+        if(objet.quantite > 0){
+          nouvelleListeObjets.push(objet);
+        }
+      })
+      if(nouvelleListeObjets.length > 0){
+        console.log(nouvelleListeObjets);
+        element.lstObjets = nouvelleListeObjets;
+        nouveauRecap.lstCategorie.push(element);
+        nouvelleListeObjets = [];
+      }
+    })
+
+    console.log(nouveauRecap);
   }
 
   render() {
@@ -145,6 +184,7 @@ class App extends React.Component {
             })
           }
         </div>
+        <Resume ref={this.setChild} validation={this.submit} />
       </React.Fragment>
     )
   }
