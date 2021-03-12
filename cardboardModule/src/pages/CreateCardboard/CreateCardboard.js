@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
@@ -35,6 +34,7 @@ class CreateCardboard extends React.Component{
     }
     this.getAvailableCardBoardContent();
   }
+
   changeStateInt=(libelle, value)=>{
     if (!(!isNaN(value) && Number.isInteger(parseFloat(value))) && value !==''){
       return;
@@ -65,6 +65,7 @@ class CreateCardboard extends React.Component{
         body: JSON.stringify(this.state),
         headers: { 'Content-Type': 'application/json' }
     }
+    
 
     httpRequest(url, options).then(response=> {
       // console.log(response);
@@ -192,19 +193,22 @@ class CreateCardboard extends React.Component{
               )         
               })
             }
+
+
           </div>
         </div>
         <div className="row">
         
           {
-          this.state.availableContentList.map((content, key) =>{
+            this.state.availableContentList.map((content, key) =>{
             return(
-              <div className="col-3" idContenu = {this.props.idContenu}  onClick= {() => this.chooseContent(key)}> 
-                <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
+              <div className="col-3" onClick= {() => this.chooseContent(key)}> 
+                <AvailableContent id={key} title={content.descriptif} />
               </div>
             )         
             })
           }
+          
         </div>
         
         <div className="row text-center mt-5 mb-3">
