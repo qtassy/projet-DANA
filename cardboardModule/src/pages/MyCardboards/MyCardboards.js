@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './MyCardboards.scss';
 import Piece from '../../components/Piece/Piece';
 import {httpRequest} from '../../services/httpRequestService';
+
 class MyCardboards extends React.Component {
   constructor(props) {
     super(props);

@@ -23,7 +23,6 @@ class CreateCardboard extends React.Component{
         //   descriptif: string
         // }
       ],
-
       choosenContentList : [
         // {
         //   idContenu: int, 
@@ -174,9 +173,8 @@ class CreateCardboard extends React.Component{
           </div>
         </div>
         <div id="cardboard-content" className="mb-4">
-          {/* <textarea disabled class="form-control" id="text-area" placeholder="Contenu du carton" rows="3"></textarea> */}
+          <p className="text">Contenu du carton</p>
           <div className="row">
-            <p className="text">Contenu du carton</p>
             {
             this.state.chosenContentList.map((content, key) =>{
               return(
@@ -184,10 +182,8 @@ class CreateCardboard extends React.Component{
                   <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
                 </div>
               )         
-              })
+            })
             }
-
-
           </div>
         </div>
 
