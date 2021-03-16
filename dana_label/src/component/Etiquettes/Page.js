@@ -15,7 +15,7 @@ export class Page extends Component {
     }
 
     getCartons() {
-        const url = 'http://obiwan2.univ-brest.fr:7143/cartons/';
+        const url = 'http://obiwan2.univ-brest.fr:7144/cartonsPiece/6';
 
         const requestOptions = {
             method: 'GET',
@@ -24,7 +24,7 @@ export class Page extends Component {
 
         fetch(url, requestOptions)
         .then(response => response.json())
-        .then(data => this.setState({cartons : data.cartons}))
+        .then(data => this.setState({cartons : data}))
         .catch(error => console.error(error));
     }
 
@@ -34,11 +34,11 @@ export class Page extends Component {
 
     render() {
         const labels = this.state.cartons.map((carton) =>
-            <Etiquette  id={carton.id}
+            <Etiquette  id={carton.idCarton}
                     couleur={carton.couleur}
                     origine={carton.origine}
                     destination={carton.destination}
-                    key={carton.id}
+                    key={carton.idCarton}
             />
         );
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './../../css/Label.css'
+import logo from './../../UBO_Logo_Dana.png'
 
 const QRCode= require('qrcode.react');
 
@@ -16,7 +17,17 @@ export class Etiquette extends Component {
                     {this.props.origine + ' → ' + this.props.destination}
                 </div>
                 <div>
-                    <QRCode value={"/detailCarton/" + this.props.id} />
+                    <   QRCode  value={"https://www.youtube.com/"}
+                                size={256}
+                                imageSettings={{
+                                    src: logo,
+                                    x: null,
+                                    y: null,
+                                    height: 30,
+                                    width: 30,
+                                    excavate: true,
+                                }}
+                    />
                 </div>
             </div>
         )

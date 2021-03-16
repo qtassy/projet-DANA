@@ -3,7 +3,7 @@ import ReactToPrint from 'react-to-print'
 import './../../css/Label.css'
 import Page from './Page.js'
 
-export class ListeEtiquette extends Component {
+export class ListeEtiquettes extends Component {
     render() {
         return (
             <div>
@@ -38,4 +38,4 @@ export class ListeEtiquette extends Component {
     }
 }
 
-export default ListeEtiquette;
+export default ListeEtiquettes;

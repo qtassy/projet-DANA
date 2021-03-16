@@ -1,0 +1,22 @@
+.elementFormConnaissance {
+    text-align: center;
+    border-radius: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formConnaissance {
+    margin-top: 2%;
+    text-align: center;
+}
+
+#validerFormConnaissance {
+    background-color: #FF7276;
+    border-color: #FF7276;
+}
+
+#validerFormConnaissance:hover {
+    background-color: #44797B;
+    border-color: #44797B;
+}

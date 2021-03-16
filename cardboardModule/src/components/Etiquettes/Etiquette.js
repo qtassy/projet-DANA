@@ -9,14 +9,14 @@ export class Etiquette extends Component {
         return (
             <div className={"label card col-lg-6-auto col-md-6 col-sm-6"} style={{backgroundColor: this.props.couleur}}>
                 <div>
-                    {this.props.id}
+                    {this.props.idCarton}
                 </div>
 
                 <div>
                     {this.props.origine + ' → ' + this.props.destination}
                 </div>
                 <div>
-                    <QRCode value={"/detailCarton/" + this.props.id} />
+                    <QRCode value={"/detailCarton/" + this.props.idCarton} />
                 </div>
             </div>
         )
