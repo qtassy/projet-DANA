@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
@@ -204,11 +205,11 @@ class CreateCardboard extends React.Component{
   render(){
     return(
       <div className="container mt-3">
+        <div className="row mb-4">
          <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
           <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
         </cameraModal>
         
-        <div className="row">
           <div className="col-6">
             <div className="square">
               <div className="content">
@@ -267,7 +268,8 @@ class CreateCardboard extends React.Component{
                 </div>
               </div>
             </div>
-            <div className="form-group mb-0">
+
+            <div className="form-group">
               <div className="form-check">
                   <input className="form-check-input" type="checkbox" id="gridCheck"
                     checked = {this.state.cardboard.fragile}
@@ -277,58 +279,62 @@ class CreateCardboard extends React.Component{
             </div>
           </div>
         </div>
-        <div className="form-group mt-4">
-        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedOrigin}
-        onChange={ (e) => this.changeOriginRoom(e.target.value)}>
-          <option defaultValue>Origine</option>
-          { 
-            this.state.originRoomList.map((room, key) =>{
-            return(
-              <option value={key}>{room.libelle}</option>
-            )         
-            })
-          }
-        </select>
 
-        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedDestination}
-        onChange={ (e) => this.changeDestinationRoom(e.target.value)}>
-          <option defaultValue>Destination</option>
-          { 
-            this.state.destinationRoomList.map((room, key) =>{
-            return(
-              <option value={key}>{room.libelle}</option>
-            )         
-            })
-          }
-        </select>
-        </div>
+        <div className="form-group mt-4">
+          <select className="form-select" id="input" type="text" 
+            value = {this.state.selectedOrigin}
+            onChange={ (e) => this.changeOriginRoom(e.target.value)}
+          >
+            <option defaultValue>Origine</option>
+            { 
+              this.state.originRoomList.map((room, key) =>{
+              return(
+                <option value={key}>{room.libelle}</option>
+              )         
+              })
+            }
+          </select>
+        </div> 
+
+        <div className="form-group">
+          <select className="form-select" id="input" type="text" 
+            value = {this.state.selectedDestination}
+            onChange={ (e) => this.changeDestinationRoom(e.target.value)}
+          >
+            <option defaultValue>Destination</option>
+            { 
+              this.state.destinationRoomList.map((room, key) =>{
+              return(
+                <option value={key}>{room.libelle}</option>
+              )         
+              })
+            }
+          </select>
+        </div> 
+
         <div className="form-group mt-4">
           <div className="input-group">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="">Dimensions(cm)  </span>
-            </div>
-            <input type="number" className="form-control" placeholder="Longueur"
-            value={this.state.cardboard.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
+            <input type="number" className="form-control cardDim" placeholder="Longueur"
+              value={this.state.cardboard.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
             />
-            <input type="number" className="form-control" placeholder="largeur"
-            value={this.state.cardboard.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
+            <input type="number" className="form-control cardDim" placeholder="largeur"
+              value={this.state.cardboard.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
             />
-            <input type="number" className="form-control" placeholder="hauteur"
-            value={this.state.cardboard.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
+            <input type="number" className="form-control cardDim" placeholder="hauteur"
+              value={this.state.cardboard.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
             />
-
           </div>
         </div>
-        <div id="cardboard-content" className="mb-4">
+
+        <div id="cardboard-content">
             {
               this.showTitle()
             }
-            
           <div className="row">
             {
             this.state.chosenContentList.map((content, key) =>{
               return(
-                <div className="col-3" idContenu = {this.props.idContenu}  onClick= {() => this.selectContent(key)}> 
+                <div className="col-3 mt-4" idContenu = {this.props.idContenu}  onClick= {() => this.selectContent(key)}> 
                   <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
                 </div>
               )         
@@ -341,13 +347,12 @@ class CreateCardboard extends React.Component{
           {
             this.state.availableContentList.map((content, key) =>{
             return(
-              <div className="col-3" onClick= {() => this.selectContent(key)}> 
+              <div className="col-3 mt-4" onClick= {() => this.selectContent(key)}> 
                 <AvailableContent id={key} title={content.descriptif} />
               </div>
             )         
             })
           }
-          
         </div>
         
         <div className="row text-center mt-5 mb-3" >

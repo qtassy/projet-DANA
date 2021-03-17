@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./ListModules.scss";
 import { TiInfoLarge } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 import { MdChevronLeft } from "react-icons/md";
-import { Link } from "react-router-dom";
 
 class Jumbotron extends React.Component{
     render(){
@@ -28,12 +28,12 @@ class Module extends React.Component{
             <div className="col-xs-12 col-md-6">
                 <div className="card card-module mb-5">
                     <div className="row">
-                        <div className="col-lg-4">
+                        <div className="col-4">
                             <div className="round-info">
                                 <TiInfoLarge className="icon-info"/>
                             </div>
                         </div>
-                        <div className="col-lg-8">
+                        <div className="col-8">
                             <div className="card-body">
                                 <p className="card-text mb-0">{this.props.text}</p>
                                 <a href={this.props.link} className="link-round">
