@@ -116,6 +116,12 @@ class CreateCardboard extends React.Component{
     }
   }
 
+  showTitle(){
+    if (this.state.chosenContentList.length === 0) {
+      return ( <p className="text" >Contenu du carton</p>)
+    }
+  }
+
   render(){
     return(
       <div className="container mt-3">
@@ -195,7 +201,10 @@ class CreateCardboard extends React.Component{
           </div>
         </div>
         <div id="cardboard-content" className="mb-4">
-          <p className="text">Contenu du carton</p>
+            {
+              this.showTitle()
+            }
+            
           <div className="row">
             {
             this.state.chosenContentList.map((content, key) =>{
