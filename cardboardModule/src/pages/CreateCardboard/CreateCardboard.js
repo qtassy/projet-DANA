@@ -229,7 +229,7 @@ class CreateCardboard extends React.Component{
         <div className="form-group mt-4">
           <div className="input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text" id="">Taille du carton en centimètres  </span>
+              <span className="input-group-text" id="">Dimensions(cm)  </span>
             </div>
             <input type="number" className="form-control" placeholder="Longueur"
             value={this.state.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
