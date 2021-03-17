@@ -198,7 +198,7 @@ class App extends React.Component {
           {
             this.state.listeActuelle.lstObjets.map((x, i) => {
               return (
-                <div className={" col-4 col-sm-3 col-md-2 "}  key={i} id={"block-" + x.libelle} >
+                <div className={" mt-3 col-4 col-sm-3 col-md-2 "}  key={i} id={"block-" + x.libelle} >
                    <div className={"row"}>
                       <div className={"col-12 backgroundObjet itemObjet"}>
                         <FontAwesomeIcon  icon={faImages} />
