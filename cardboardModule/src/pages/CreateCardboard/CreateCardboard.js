@@ -24,16 +24,25 @@ class CreateCardboard extends React.Component{
         //   descriptif: string
         // }
       ],
-
       chosenContentList : [
         // {
         //   idContenu: int, 
         //   descriptif: string
         // }
       ],
+      originRoomList: [
+        // id : int,
+        // libelle : string
+         
+      ],
+      destinationRoomList: [
+        // id : int,
+        // libelle : string
+      ],
 
     }
     this.getAvailableCardBoardContent();
+    this.getRooms();
   }
 
   changeStateInt=(libelle, value)=>{
@@ -85,6 +94,25 @@ class CreateCardboard extends React.Component{
     httpRequest(url, options).then(response=> {
       let obj = {
         availableContentList : response
+      };
+      this.setState(obj);
+    });
+  }
+
+  getRooms= () =>{
+    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/1/2"
+
+    var options = {
+      method: 'GET',
+      body: null,
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    httpRequest(url, options).then(response=> {
+      console.log(response)
+      let obj = {
+        originRoomList : response.origine,
+        destinationRoomList : response.destination,
       };
       this.setState(obj);
     });
@@ -168,20 +196,35 @@ class CreateCardboard extends React.Component{
                   <input className="form-check-input" type="checkbox" id="gridCheck"
                     checked = {this.state.fragile}
                    onChange = {(e) => this.changeStateBoolean("fragile", e.target.checked)}/>
-                  <label className="form-check-label" for="gridCheck">Fragile</label>
+                  <label className="form-check-label">Fragile</label>
               </div>
             </div>
           </div>
         </div>
         <div className="form-group mt-4">
-          <input id="input" type="text" className="form-control" placeholder="Destination"
-          value={this.state.pieceOrigine} onChange={ (e) => this.changeState("pieceOrigine", e.target.value)}
-          />
-        </div>
-        <div className="form-group mt-4">
-          <input id="input" type="text" className="form-control" placeholder="Origine"
-            value={this.state.pieceArrive} onChange={ (e) => this.changeState("pieceArrive", e.target.value)}
-        />
+        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedOrigin}
+        onChange={ (e) => this.changeState("pieceOrigine", e.target.value)}>
+          <option defaultValue>Origine</option>
+          { 
+            this.state.originRoomList.map((room, key) =>{
+            return(
+              <option value={key}>{room.libelle}</option>
+            )         
+            })
+          }
+        </select>
+
+        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedOrigin}
+        onChange={ (e) => this.changeState("pieceDestination", e.target.value)}>
+          <option defaultValue>Destination</option>
+          { 
+            this.state.destinationRoomList.map((room, key) =>{
+            return(
+              <option value={key}>{room.libelle}</option>
+            )         
+            })
+          }
+        </select>
         </div>
         <div className="form-group mt-4">
           <div className="input-group">
