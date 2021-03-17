@@ -153,7 +153,7 @@ class App extends React.Component {
     })
 
     console.log(nouveauRecap);
-    localStorage.setItem("Recapitulatif", nouveauRecap);
+    localStorage.setItem("Recapitulatif", JSON.stringify(nouveauRecap));
     window.location.href = "/Recapitulatif";
   }
 
