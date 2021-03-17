@@ -66,7 +66,7 @@ export class FormulaireConnaissance extends Component {
 
     valider(event) {
         event.preventDefault();
-        const url = 'http://obiwan2.univ-brest.fr:7144/'
+        const url = 'http://obiwan2.univ-brest.fr:7144/ajtDemenagement'
 
         const requestOptions = {
             method: 'POST',
@@ -107,8 +107,9 @@ export class FormulaireConnaissance extends Component {
                             placeholder={"Adresse de votre futur logement"} value={this.state.adresseFutur} onChange={this.setAdresseFutur}/>
                     </div>
 
-                    <button type="submit" className={"btn btn-primary elementFormConnaissance"} id={"validerFormConnaissance"}>Valider</button>
+                    <button type="submit" className={"btn elementFormConnaissance"} id={"validerFormConnaissance"}>Valider</button>
                 </form>
+                
             </div>
         )
     }

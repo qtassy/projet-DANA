@@ -129,7 +129,7 @@ export class CreationCompte extends Component {
                         <p>{this.state.erreurMdp}</p>
                     </div>
 
-                    <button type="submit" className={"btn btn-primary elementFormCreationCompte"}
+                    <button type="submit" className={"btn elementFormCreationCompte"}
                         id={"validerFormCreationCompte"}>Valider</button>
                 </form>
             </div>

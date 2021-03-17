@@ -14,9 +14,11 @@
 #validerFormCreationCompte {
     background-color: #FF7276;
     border-color: #FF7276;
+    color: white;
 }
 
-#validerFormCreationCompte:hover {
+#validerFormCreationCompte:hover, #validerFormCreationCompte:active {
     background-color: #44797B;
     border-color: #44797B;
+    color: white;
 }
