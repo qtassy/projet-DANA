@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.boutonSelectCat{
+    border : 1.5px solid #FF7276 !important;
+    color : #FF7276 !important; 
+    width:100% !important;
+    font-family: 'Roboto', sans-serif;
+    padding: 0.075rem .75rem !important;
+    &:checked, &:active, &:focus, &:active:focus{
+        box-shadow: none !important;
+        border:none !important;}
+}
+
+.Actif {
+    background-color: #FF7276  !important;
+    color:white !important;
+}
+
+.menuSelectCat{
+    justify-content: left !important;
+    margin-top: 7rem !important;
+}
+
+.Title{
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.top{
+    -webkit-box-shadow: 0px 7px 10px 0px rgba(209, 209, 209, 0.75);
+    -moz-box-shadow: 0px 7px 10px 0px rgba(209, 209, 209, 0.75);
+    box-shadow: 0px 7px 10px 0px rgba(209, 209, 209, 0.75);
+    position: fixed;
+    background-color: white;
+    width:100%;
+    top: 0;
+
+}
+
+.incrementButton{
+    width: 1.5rem;
+    height: 1.5rem;
+    padding :0px !important;
+    color:black !important;
+    background-color: white !important;
+    border:none !important;
+}
+
+.backgroundObjet{
+    background-color:  rgb(231, 231, 231)  !important;
+}
+
+.itemObjet{
+    text-align: center;
+    svg{
+        font-size: 60px;
+    }
+}
+
+.resumeBottom{
+    position:fixed;
+    bottom: 15px;
+    width:90%;
+    margin:0 5% 0 5% !important;
+    background-color: #FF7276 !important;
+    border-radius: 10px;
+
+    span{
+        color :white;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        text-align:center;
+    }
+}
+
+.camionResume{
+    font-size:30px !important;
+    &:hover{
+        background-color: white;
+    }
+}
+
+
+
+@media screen and (min-width:960px){
+    .menuSelectCat{
+        justify-content: center !important;
+    }
+    .resumeBottom{
+        width:60%;
+        margin:0 20% 0 20% !important;
+        
+    }
+}
