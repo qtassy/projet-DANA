@@ -1,0 +1,56 @@
+/* MODULE */
+.jumbotron-modules{
+    background-color: #FF7276;
+  }
+  
+  .card-module{
+    background-color: #F6F6F6;
+    border: none;
+    width: 85%;
+  }
+  
+  .card-module .card-body{
+    position: relative;
+  }
+  
+  /* ICON INFO */
+  .round-info{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    background-color: #D8D8D8;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+  .icon-info{
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* MODULE BUTTON */
+  .round-module{
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: #F6F6F6;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -5%;
+  }
+  
+  .arrow-module{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 3px;
+    right: -12px;
+    color: #7C7D7E;
+  }
