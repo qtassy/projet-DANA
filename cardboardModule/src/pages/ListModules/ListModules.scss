@@ -1,17 +1,23 @@
 /* MODULE */
 .jumbotron-modules{
     background-color: #FF7276;
-  }
+
+    .back{
+        position: relative;
+        bottom: 4px;
+        color: white;
+    }
+}
   
-  .card-module{
-    background-color: #F6F6F6;
-    border: none;
-    width: 85%;
-  }
-  
-  .card-module .card-body{
-    position: relative;
-  }
+.card-module{
+background-color: #F6F6F6;
+border: none;
+width: 85%;
+}
+
+.card-module .card-body{
+position: relative;
+}
   
   /* ICON INFO */
   .round-info{

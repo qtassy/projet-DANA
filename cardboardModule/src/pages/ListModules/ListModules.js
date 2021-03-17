@@ -2,13 +2,20 @@ import React from "react";
 import "./ListModules.scss";
 import { TiInfoLarge } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
+import { MdChevronLeft } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 class Jumbotron extends React.Component{
     render(){
         return(
             <div className="jumbotron jumbotron-fluid jumbotron-modules">
                 <div className="container">
-                    <h1 className="display-4 font-weight-normal text-light jumbotron-text">{this.props.title}</h1>
+                    <h1 className="display-4 font-weight-normal text-light jumbotron-text">
+                        <Link to="/">
+                            <MdChevronLeft className="back" />
+                        </Link>
+                        {this.props.title}
+                    </h1>
                 </div>
             </div>
         )
