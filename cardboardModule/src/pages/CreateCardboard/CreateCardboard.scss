@@ -105,6 +105,10 @@
 }
 
 .btn-save, .btn-cancel{
+    &:hover{
+        color: white;
+    }
+
     color: white;
     border-radius: 30px;
     width: 80%;

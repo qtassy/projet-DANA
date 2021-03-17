@@ -14,6 +14,7 @@ export class CreationPieces extends Component {
         this.setNomPiece = this.setNomPiece.bind(this);
         this.ajouterNomPiece = this.ajouterNomPiece.bind(this);
         this.supprimerNomPiece = this.supprimerNomPiece.bind(this);
+        this.valider = this.valider.bind(this);
     }
 
     setNomPiece(event, index) {
@@ -37,7 +38,7 @@ export class CreationPieces extends Component {
     }
 
     ajouterNomPiece() {
-        let pieces = [...this.state.pieces, {id : this.state.pieces.length, nom : ""}];
+        let pieces = [...this.state.pieces, {nom : ""}];
         this.setState({pieces});
     }
 
@@ -55,37 +56,36 @@ export class CreationPieces extends Component {
 
         const url = 'http://obiwan2.univ-brest.fr:7144/ajtPieces'
 
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({pieces : this.state.pieces, idLogement : 3})
-            };
-            
-            fetch(url, requestOptions)
-            .catch(error => console.error(error));
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({pieces : this.state.pieces, idLogement : 4})
+        };
+        
+        fetch(url, requestOptions)
+        .catch(error => console.error(error));
     }
 
     render() {
         return(
             <div className={"formCreationPieces"}>
-               <form onSubmit={this.valider}>
+                <form onSubmit={this.valider}>
                         {this.state.pieces.map((piece, index) => 
                             <div className={"form-group"} key={"clePiece-" + index}>
                                 <input
                                     type={"text"} className={"form-control elementFormCreationPieces nomsPieces"} id={"nomPiece-" + piece.id}
-                                    aria-describedby={"nom"} placeholder={"NOM"} required
-                                    onChange={(e) => this.setNomPiece(e, piece.id)}
-                                    value={this.state.nom}
+                                    aria-describedby={"nom"} placeholder={"NOM"} 
+                                    onChange={(e) => this.setNomPiece(e, index)}
+                                    required value={this.state.nom}
                                 />
                             </div>
                         )}
 
                         <div className={"form-group"}>
-                            <button onClick={this.ajouterNomPiece} id={"ajoutPiece"}
-                                className={"btn elementFormCreationPieces ajoutSuppr"} >+</button>
-
-                            <button onClick={this.supprimerNomPiece} id={"supprPiece"}
+                            <button type={"button"} onClick={this.supprimerNomPiece} id={"supprPiece"}
                                 className={"btn elementFormCreationPieces ajoutSuppr"}>-</button>
+                            <button type={"button"} onClick={this.ajouterNomPiece} id={"ajoutPiece"}
+                                className={"btn elementFormCreationPieces ajoutSuppr"} >+</button>
                         </div>
                         
                         <div className={"form-group"}>
