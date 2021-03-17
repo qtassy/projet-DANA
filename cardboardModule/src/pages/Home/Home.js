@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from "../../components/Home/Card";
+import Card from "../../components/Card/Card";
 import './Home.scss';
 
 import Icon1 from "../../img/icon1-home.png";

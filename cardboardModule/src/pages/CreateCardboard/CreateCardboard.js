@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
-import { Link } from 'react-router-dom';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import cameraModal from '../../components/cameraModal/cameraModal';
