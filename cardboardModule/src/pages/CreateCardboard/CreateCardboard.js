@@ -3,6 +3,11 @@ import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
 import { Link } from 'react-router-dom';
+import Camera from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+import cameraModal from '../../components/cameraModal/cameraModal';
+
+
 class CreateCardboard extends React.Component{
   constructor(props){
     super(props);
@@ -45,10 +50,15 @@ class CreateCardboard extends React.Component{
         // id : int,
         // libelle : string
       ],
+      openModal : false,
 
     }
     this.getAvailableCardBoardContent();
     this.getRooms();
+  }
+
+  handleTakePhoto = (dataUri)=> {
+    console.log('takePhoto');
   }
 
   changeStateInt=(libelle, value)=>{
@@ -186,20 +196,50 @@ class CreateCardboard extends React.Component{
     }
   }
 
+  changeModal(){
+    this.setState({openModal: !this.state.openModal});
+    console.log('openModal : ', this.state.openModal);
+  }
+
   render(){
     return(
       <div className="container mt-3">
+         <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
+          <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
+        </cameraModal>
+        
         <div className="row">
           <div className="col-6">
             <div className="square">
               <div className="content">
                 <div className="table">
-                  <div className="table-cell">
+                  <button className="table-cell" onClick = {(e)=>this.changeModal()}>
                     <svg id="picture" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-camera" viewBox="0 0 16 16">
                       <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
                       <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
                     </svg>
-                  </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
@@ -324,5 +364,18 @@ class CreateCardboard extends React.Component{
     )
   }
 }
+
+class CameraComponent extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
+  render(){
+    return(
+      <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
+    )
+  }
+}
+
 
 export default CreateCardboard;
