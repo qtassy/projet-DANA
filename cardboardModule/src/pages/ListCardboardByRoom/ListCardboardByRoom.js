@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ListCardboard.scss';
+import './ListCardboardByRoom.scss';
+import NavMyCardboards from "../../components/Menu/NavMyCardboard";
 import ImageCartonExemple from "../../img/carton.jpg";
 
 class CardBoard extends React.Component{
@@ -9,7 +10,7 @@ class CardBoard extends React.Component{
             <div className="col-xs-12 col-lg-6 mb-5">
                 <div className="row">
                     <div className="col-2">
-                        <img src={this.props.image} className="rounded"/>
+                        <img src={this.props.image} alt="carton" className="rounded"/>
                     </div>
                     <div className="col-2">
                         <div className="container-number rounded-circle">
@@ -42,6 +43,7 @@ class ListCardboard extends React.Component{
     render(){
         return(
             <>
+                <NavMyCardboards link="/MakeMyCardboards/myCardBoards"/>
                 <h1 className="font-weight-bolder text-center title mt-3 mb-3">CUISINE</h1>
                 <div className="container">
                     <div className="cardboard mx-auto">
