@@ -11,13 +11,13 @@ class CreateCardboard extends React.Component{
         numeroCarton : null, //int
         pieceOrigine: null, //int
         pieceArrive : null,//int
-        contenus : null,//int [1,*]
+        contenus : [],//int [1,*]
         largeur : null,//double
         hauteur : null,//double
         longueur : null,//double
         couleur : "",//string
         fragile : false,//int
-        poids : null,//double
+        poids : 0,//double
         image : "",//data uri (string)
       },  
 
@@ -57,7 +57,7 @@ class CreateCardboard extends React.Component{
     }    
     
     let newCardboard = this.state.cardboard;
-    newCardboard[libelle] = value;
+    newCardboard[libelle] = parseInt(value);
     this.setState({ cardboard: newCardboard });
   }
 
@@ -74,42 +74,48 @@ class CreateCardboard extends React.Component{
     if(key == null){
       return;
     }
-    console.log("key : ", key);
-    this.setState({selectedOrigin: key});
-
-    let obj = {
-      selectedOrigin :null,
-      cardboard : {}
-    }
-    obj.selectedOrigin = key;
-    obj.cardboard = (this.state.cardboard);
-    obj.cardboard.pieceOrigine = this.state.originRoomList[key].id;
-    this.setState(obj);
-    console.log("obj : ", obj)
+    let val = parseInt(key);
+    this.state.selectedOrigin = val;
+    this.state.cardboard.pieceOrigine = this.state.originRoomList[val].id;
     console.log(this.state);
   }
 
   changeDestinationRoom(key){
-    this.setState({selectedDestination: key });
-    let newCardboard = this.state.cardboard;
-    newCardboard.pieceArrive = this.state.destinationRoomList[key].id;
-    this.setState({cardboard : newCardboard});
+    if(key == null){
+      return;
+    }
+    let val = parseInt(key);
+    this.state.selectedDestination= val;
+    this.state.cardboard.pieceArrive = this.state.destinationRoomList[val].id;
     console.log(this.state);
   }
 
-  addCardboard = ()=>{
-    var url = "http://obiwan2.univ-brest.fr:7144/addCarton";
+  createCardboard = ()=>{
+    console.log("requete", this.state);
+    console.log("chosenContent : ", this.state.chosenContentList);
+    this.state.cardboard.contenus = [];
+    this.state.chosenContentList.forEach(content=>{
+      this.state.cardboard.contenus.push(content.idContenu);
+    })
+    console.log("cartdboard", this.state.cardboard);
+    var url = "http://obiwan2.univ-brest.fr:7144/ajtCarton";
 
     var options = {
         method: 'POST',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(this.state.cardboard),
         headers: { 'Content-Type': 'application/json' }
     }
     
-
-    httpRequest(url, options).then(response=> {
-      // console.log(response);
+    httpRequest(url, options).then(response=> { 
+       window.location.href = "http://localhost:3000/MakeMyCardboards/myCardBoards";
+       alert(response.message);
+    })
+    .catch(error=>{
+      alert(error);
+      
     });
+
+   
   }
 
   getAvailableCardBoardContent = () =>{
@@ -130,7 +136,7 @@ class CreateCardboard extends React.Component{
   }
 
   getRooms= () =>{
-    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/1/2"
+    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/4/3 "
 
     var options = {
       method: 'GET',
@@ -208,16 +214,16 @@ class CreateCardboard extends React.Component{
               <p className="font-weight-bolder mb-1">Etiquette</p>
               <div className="row mx-auto">
                 <div className="col-3">
-                  <button className="btn etiquette1 btn-circle rounded-circle" onClick = { (e) => this.changeState("couleur", "rose")}></button>
+                  <button className="btn etiquette1 btn-circle rounded-circle" onClick = { (e) => this.changeState("couleur", "pink")}></button>
                 </div>
                 <div className="col-3">
-                  <button className="btn etiquette2 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "mauve")}></button>
+                  <button className="btn etiquette2 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "purple")}></button>
                 </div>
                 <div className="col-3">
                   <button className="btn etiquette3 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "cyan")}></button>
                 </div>
                 <div className="col-3">
-                  <button className="btn etiquette4 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "gris")}></button>
+                  <button className="btn etiquette4 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "grey")}></button>
                 </div>
               </div>
             </div>
@@ -244,9 +250,8 @@ class CreateCardboard extends React.Component{
           }
         </select>
 
-        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedDestinationRoom}
-        onChange={ (e) => {this.changeState("pieceDestination", this.state.destinationRoomList[e.target.value].id);
-        this.setState({selectedDestinationRoom : e.target.value})}}>
+        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedDestination}
+        onChange={ (e) => this.changeDestinationRoom(e.target.value)}>
           <option defaultValue>Destination</option>
           { 
             this.state.destinationRoomList.map((room, key) =>{
@@ -305,9 +310,9 @@ class CreateCardboard extends React.Component{
           
         </div>
         
-        <div className="row text-center mt-5 mb-3">
-          <div className="col-6">
-            <button className="btn btn-save">Enregistrer</button>
+        <div className="row text-center mt-5 mb-3" >
+          <div className="col-6" >
+            <button className="btn btn-save" onClick = { (e) => this.createCardboard()}>Enregistrer</button>
           </div>
           <div className="col-6">
             <Link to="/MakeMyCardboards/myCardBoards">
