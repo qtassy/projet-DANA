@@ -1,8 +1,7 @@
 import React from 'react';
 import Menu from './Menu.js';
 import Home from './Home.js';
-import {PrepareCardboard} from './ListModules.js';
-import {Transport} from './ListModules.js';
+import {PrepareCardboard, Transport} from './ListModules.js';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
 class App extends React.Component{

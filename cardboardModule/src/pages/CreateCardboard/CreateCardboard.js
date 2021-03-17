@@ -7,33 +7,48 @@ class CreateCardboard extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      numeroCarton : 12354, //int
-      pieceOrigine: null, //int
-      pieceArrive : null,//int
-      contenus : null,//int [1,*]
-      largeur : null,//double
-      hauteur : null,//double
-      longueur : null,//double
-      couleur : "",//string
-      fragile : false,//int
-      poids : null,//double
-      image : "",//data uri (string)
+      cardboard: {
+        numeroCarton : null, //int
+        pieceOrigine: null, //int
+        pieceArrive : null,//int
+        contenus : null,//int [1,*]
+        largeur : null,//double
+        hauteur : null,//double
+        longueur : null,//double
+        couleur : "",//string
+        fragile : false,//int
+        poids : null,//double
+        image : "",//data uri (string)
+      },  
+
+      selectedOrigin : null,
+      selectedDestination : null,
+
       availableContentList : [
         // {
         //   idContenu: int, 
         //   descriptif: string
         // }
       ],
-
       chosenContentList : [
         // {
         //   idContenu: int, 
         //   descriptif: string
         // }
       ],
+      originRoomList: [
+        // id : int,
+        // libelle : string
+         
+      ],
+      destinationRoomList: [
+        // id : int,
+        // libelle : string
+      ],
 
     }
     this.getAvailableCardBoardContent();
+    this.getRooms();
   }
 
   changeStateInt=(libelle, value)=>{
@@ -41,21 +56,45 @@ class CreateCardboard extends React.Component{
       return;
     }    
     
-    let obj = {};
-    obj[libelle] = value;
-    this.setState(obj);
+    let newCardboard = this.state.cardboard;
+    newCardboard[libelle] = value;
+    this.setState({ cardboard: newCardboard });
   }
 
-  changeStateBoolean = (libelle, value)=>{
-    console.log(libelle, value)  
-    let obj = {};
-    obj[libelle] =value;
-    this.setState(obj);
-  }
   changeState = (libelle, value)=>{
-    let obj = {};
-    obj[libelle] = value;
+    console.log("libelle/value : ", libelle, value)
+    let newCardboard = this.state.cardboard;
+    newCardboard[libelle] = value;
+    this.setState({ cardboard: newCardboard });
+
+    console.log("state : ", this.state)
+  }
+
+  changeOriginRoom(key){
+    if(key == null){
+      return;
+    }
+    console.log("key : ", key);
+    this.setState({selectedOrigin: key});
+
+    let obj = {
+      selectedOrigin :null,
+      cardboard : {}
+    }
+    obj.selectedOrigin = key;
+    obj.cardboard = (this.state.cardboard);
+    obj.cardboard.pieceOrigine = this.state.originRoomList[key].id;
     this.setState(obj);
+    console.log("obj : ", obj)
+    console.log(this.state);
+  }
+
+  changeDestinationRoom(key){
+    this.setState({selectedDestination: key });
+    let newCardboard = this.state.cardboard;
+    newCardboard.pieceArrive = this.state.destinationRoomList[key].id;
+    this.setState({cardboard : newCardboard});
+    console.log(this.state);
   }
 
   addCardboard = ()=>{
@@ -85,6 +124,25 @@ class CreateCardboard extends React.Component{
     httpRequest(url, options).then(response=> {
       let obj = {
         availableContentList : response
+      };
+      this.setState(obj);
+    });
+  }
+
+  getRooms= () =>{
+    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/1/2"
+
+    var options = {
+      method: 'GET',
+      body: null,
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    httpRequest(url, options).then(response=> {
+      console.log(response)
+      let obj = {
+        originRoomList : response.origine,
+        destinationRoomList : response.destination,
       };
       this.setState(obj);
     });
@@ -144,7 +202,7 @@ class CreateCardboard extends React.Component{
           <div className="col-6">
             <div className="form-group">
               <input id="input" type="number" className="form-control" placeholder="N°" 
-              value={this.state.numeroCarton} onChange={ (e) => this.changeStateInt("numeroCarton", e.target.value)}/>
+              value={this.state.cardboard.numeroCarton} onChange={ (e) => this.changeStateInt("numeroCarton", e.target.value)}/>
             </div>
             <div className="circles mb-2">
               <p className="font-weight-bolder mb-1">Etiquette</p>
@@ -166,36 +224,52 @@ class CreateCardboard extends React.Component{
             <div className="form-group mb-0">
               <div className="form-check">
                   <input className="form-check-input" type="checkbox" id="gridCheck"
-                    checked = {this.state.fragile}
-                   onChange = {(e) => this.changeStateBoolean("fragile", e.target.checked)}/>
-                  <label className="form-check-label" for="gridCheck">Fragile</label>
+                    checked = {this.state.cardboard.fragile}
+                   onChange = {(e) => this.changeState("fragile", e.target.checked)}/>
+                  <label className="form-check-label">Fragile</label>
               </div>
             </div>
           </div>
         </div>
         <div className="form-group mt-4">
-          <input id="input" type="text" className="form-control" placeholder="Destination"
-          value={this.state.pieceOrigine} onChange={ (e) => this.changeState("pieceOrigine", e.target.value)}
-          />
-        </div>
-        <div className="form-group mt-4">
-          <input id="input" type="text" className="form-control" placeholder="Origine"
-            value={this.state.pieceArrive} onChange={ (e) => this.changeState("pieceArrive", e.target.value)}
-        />
+        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedOrigin}
+        onChange={ (e) => this.changeOriginRoom(e.target.value)}>
+          <option defaultValue>Origine</option>
+          { 
+            this.state.originRoomList.map((room, key) =>{
+            return(
+              <option value={key}>{room.libelle}</option>
+            )         
+            })
+          }
+        </select>
+
+        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedDestinationRoom}
+        onChange={ (e) => {this.changeState("pieceDestination", this.state.destinationRoomList[e.target.value].id);
+        this.setState({selectedDestinationRoom : e.target.value})}}>
+          <option defaultValue>Destination</option>
+          { 
+            this.state.destinationRoomList.map((room, key) =>{
+            return(
+              <option value={key}>{room.libelle}</option>
+            )         
+            })
+          }
+        </select>
         </div>
         <div className="form-group mt-4">
           <div className="input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text" id="">Taille du carton en centimètres  </span>
+              <span className="input-group-text" id="">Dimensions(cm)  </span>
             </div>
             <input type="number" className="form-control" placeholder="Longueur"
-            value={this.state.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
+            value={this.state.cardboard.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
             />
             <input type="number" className="form-control" placeholder="largeur"
-            value={this.state.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
+            value={this.state.cardboard.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
             />
             <input type="number" className="form-control" placeholder="hauteur"
-            value={this.state.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
+            value={this.state.cardboard.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
             />
 
           </div>
