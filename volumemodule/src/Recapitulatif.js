@@ -1,7 +1,11 @@
 import React from 'react';
-const fetch = require('node-fetch');
 
-class Recapitulatif extends React.Component {
+export class Recapitulatif extends React.Component {
+
+    componentDidMount = () => {
+        var recap = localStorage.getItem("Recapitulatif");
+        console.log(recap.idUtilisateur);
+    }
 
     render() {
         return(

@@ -146,7 +146,6 @@ class App extends React.Component {
         }
       })
       if(nouvelleListeObjets.length > 0){
-        console.log(nouvelleListeObjets);
         element.lstObjets = nouvelleListeObjets;
         nouveauRecap.lstCategorie.push(element);
         nouvelleListeObjets = [];
@@ -154,8 +153,8 @@ class App extends React.Component {
     })
 
     console.log(nouveauRecap);
-    // window.location.href = "/Recapitulatif";
-    // localStorage.setItem("Recapitulatif", nouveauRecap);
+    localStorage.setItem("Recapitulatif", nouveauRecap);
+    window.location.href = "/Recapitulatif";
   }
 
   render() {
