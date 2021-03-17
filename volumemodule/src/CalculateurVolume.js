@@ -136,7 +136,7 @@ class App extends React.Component {
       lstCategorie : []
     };
     var nouvelleListeObjets = [];
-    nouveauRecap.idUtilisateur = 1;
+    nouveauRecap.idClient = 1;
     nouveauRecap.nbElements = data.nbElements;
     nouveauRecap.surface = data.surface;
     this.state.recapitulatif.forEach(element => {
@@ -159,21 +159,23 @@ class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div id="block-categorie">
-          {
-            this.state.recapitulatif.map((x, i) => {
-              return (
-                <input type="button" key={i} id={"btnCategorie" + x.categorie} value={x.categorie} onClick={e => this.onClickCategorie(e)} />
-              )
-            })
-          }
+      <div className={"container"}>
+        <div className={"row"} id="block-categorie">
+          <div className=" col-sm-6 col-md-6">
+            {
+              this.state.recapitulatif.map((x, i) => {
+                return (
+                  <input className={"btn btn-content"} type="button" key={i} id={"btnCategorie" + x.categorie} value={x.categorie} onClick={e => this.onClickCategorie(e)} />
+                )
+              })
+            }
+          </div>
         </div>
-        <div id="block-objets">
+        <div className={"row"} id="block-objets">
           {
             this.state.listeActuelle.lstObjets.map((x, i) => {
               return (
-                <div key={i} id={"block-" + x.libelle} >
+                <div className={"col-4 col-sm-3 col-md-2"}  key={i} id={"block-" + x.libelle} >
                   <FontAwesomeIcon icon={faImages} />
                   <input type="button" key={"plus-" + i} id={"btnPlus-" + x.libelle} value="+" onClick={e => this.onClickPlus(e)} />
                   <p key={"quantite-" + i} id={"quantite-" + x.libelle}>{x.quantite}</p>
@@ -186,7 +188,7 @@ class App extends React.Component {
           }
         </div>
         <Resume ref={this.setChild} validation={this.submit} />
-      </React.Fragment>
+        </div>
     )
   }
 }
