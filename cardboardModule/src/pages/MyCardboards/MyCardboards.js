@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './MyCardboards.scss';
 import Piece from '../../components/Piece/Piece';
 import {httpRequest} from '../../services/httpRequestService';
+
 class MyCardboards extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,9 @@ class MyCardboards extends React.Component {
       roomList : []
     };
 
+  this.getRooms();
+  }
+  getRooms = () =>{
     // let data =
     // [
     //   {
@@ -24,24 +28,26 @@ class MyCardboards extends React.Component {
     // this.state.roomList = data;
     // console.log("state: ", this.state);
 
-     var url = "http://obiwan2.univ-brest.fr:7144/nbCartons/1";
-
-    // let data = {
-    //   idUtilisateur
-    // }
+    var url = "http://obiwan2.univ-brest.fr:7144/nbCartons/1";
 
     var options = {
-        method: 'GET',
-        body: null,
-        headers: { 'Content-Type': 'application/json' }
+      method: 'GET',
+      body: null,
+      headers: { 'Content-Type': 'application/json' }
     }
 
+    console.log("requete")
     httpRequest(url, options).then(rooms=> {
-      this.state.roomList = rooms;
+      console.log("response : " + rooms.pieces);
+      this.setState({roomList : rooms.pieces});
+      console.log(this.state);
     });
   }
 
-   
+  getState(){
+    console.log(this.state);
+    return this.state;
+  }
 
   render() {
     return (
@@ -75,8 +81,10 @@ class MyCardboards extends React.Component {
             </a>
           </div>
         </div>
-      {this.state.roomList.map((room, index) => 
-        <Piece  key={index} number = {room.number} roomName = {room.name}/>
+        {console.log(this.getState)}
+      {
+        this.getState().roomList.map((room, index) => 
+        <Piece  key={index} number = {room.nb} roomName = {room.libelle}/>
       )}
 
       </div>

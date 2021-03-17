@@ -1,0 +1,62 @@
+.title{
+    color: #FF5561;
+    font-size: 25px;
+}
+
+.image{
+    img{
+        //position : relative;
+        //top: 50%;
+        //transform: translateY(-50%);
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        height: 40px;
+        width: 40px;
+    }
+}
+
+.container-number{
+    height: 40px;
+    width: 40px;
+    background-color: #9CFFEB;
+    display: table-cell; 
+    vertical-align: middle;
+}
+
+.number-card{
+    font-size: 20px;
+    color: white;
+    display: block;
+    text-align: center;
+}
+
+.container-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30px;
+}
+
+.icon{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    color: black;
+}
+
+.btn-edit-card:hover{
+    color: white;
+}
+
+.btn-edit-card{
+    color: white;
+    border-radius: 30px;
+    height: 50px;
+    background-color: #FF5561;
+    width: 20em;
+    display: block;
+    margin: 0 auto;
+}

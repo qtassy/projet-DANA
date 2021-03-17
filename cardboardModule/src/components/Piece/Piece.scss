@@ -17,9 +17,8 @@
 }
 
 .number{
-    font-size: 10vw;
+    font-size: 5em;
     color: black;
-    //vertical-align: middle;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -27,11 +26,13 @@
 }
 
 .roomName{
-    //font-size: 4vw;
     color : #FF5461;
     position: relative;
     left: 2%;
 }
 
-
-
+@media only screen and (max-width: 800px) {
+    .number {
+        font-size: 10vw;
+    }
+}
