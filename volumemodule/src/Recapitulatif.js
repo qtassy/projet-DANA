@@ -1,6 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImages } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import './Recapitulatif.scss'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 const fetch = require('node-fetch');
@@ -57,6 +60,32 @@ export class Recapitulatif extends React.Component {
         })
         this.setState({ recapitulatif : liste });
     }
+
+    onClickSVGPlus = (e) => {
+        /*var liste = this.state.listeActuelle;
+        var nom = e.target.parentNode.parentNode.id;
+        ([...liste.lstObjets]).forEach(element => {
+          if (element.libelle === nom.split('^')[1]) {
+            element.quantite += 1;
+            this.child.incrementer();
+          }
+        })
+        this.setState({ listeActuelle: liste });*/
+      }
+    
+      onClickSVGMoins = (e) => {
+       /* var liste = this.state.listeActuelle;
+        var nom = e.target.parentNode.parentNode.id;
+        ([...liste.lstObjets]).forEach(element => {
+          if (element.libelle === nom.split('^')[1]) {
+            element.quantite = element.quantite - 1 < 0 ? 0 : element.quantite -=1;
+            this.child.decrementer();
+          }
+        })
+        this.setState({ listeActuelle: liste });*/
+      }
+
+      
 
     onClickSuppr = (e) => {
         var cat = e.target.id.split('-')[1];
@@ -123,15 +152,23 @@ export class Recapitulatif extends React.Component {
                                         {
                                             x.lstObjets.map((y, j) => {
                                                 return(
-                                                    <div key={"blockCategorie-" + j}>
-                                                        <FontAwesomeIcon key={"img-" + j} icon={faImages} />
-                                                        <p key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</p>
-                                                        <p key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</p>
-                                                        <div key={"calcul-" + j} id={"calcul-" + j}>
-                                                            <p key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</p>
-                                                            <input type="button" key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} />
-                                                            <input type="button" key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} />
-                                                            <input type="button" key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} />
+                                                    <div className={"row"} key={"blockCategorie-" + j}>
+                                                        <div className="col-2">
+                                                            <FontAwesomeIcon key={"img-" + j} icon={faImages} />
+                                                        </div>
+                                                        <div className="col-4">
+                                                            <p key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</p>
+                                                            <p key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</p>
+                                                        </div>
+                                                        <div className="col-2" key={"calcul-" + j}>
+                                                            <span key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
+                                                        </div>
+                                                        <div className="col-2">
+                                                            <button className={"btn btn-primary incrementButtonRecap"} key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + x.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
+                                                            <button className={"btn btn-primary incrementButtonRecap"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
+                                                        </div>
+                                                        <div className="col-2">    
+                                                            <button className={"btn btn-primary suppresionButtonRecap"} key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSuppr(e)} /></button>
                                                         </div>
                                                     </div>
                                                 )

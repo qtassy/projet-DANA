@@ -45,6 +45,7 @@ class MyCardboards extends React.Component {
   }
 
   getState(){
+    console.log(this.state);
     return this.state;
   }
 
