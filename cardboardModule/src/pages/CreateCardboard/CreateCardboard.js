@@ -1,23 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
-import { Link } from 'react-router-dom';
+import Camera from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+import cameraModal from '../../components/cameraModal/cameraModal';
+
+
 class CreateCardboard extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      numeroCarton : 12354, //int
-      pieceOrigine: null, //int
-      pieceArrive : null,//int
-      contenus : null,//int [1,*]
-      largeur : null,//double
-      hauteur : null,//double
-      longueur : null,//double
-      couleur : "",//string
-      fragile : false,//int
-      poids : null,//double
-      image : "",//data uri (string)
+      cardboard: {
+        numeroCarton : null, //int
+        pieceOrigine: null, //int
+        pieceArrive : null,//int
+        contenus : [],//int [1,*]
+        largeur : null,//double
+        hauteur : null,//double
+        longueur : null,//double
+        couleur : "",//string
+        fragile : false,//int
+        poids : 0,//double
+        image : "",//data uri (string)
+      },  
+
+      selectedOrigin : null,
+      selectedDestination : null,
+
       availableContentList : [
         // {
         //   idContenu: int, 
@@ -39,10 +50,15 @@ class CreateCardboard extends React.Component{
         // id : int,
         // libelle : string
       ],
+      openModal : false,
 
     }
     this.getAvailableCardBoardContent();
     this.getRooms();
+  }
+
+  handleTakePhoto = (dataUri)=> {
+    console.log('takePhoto');
   }
 
   changeStateInt=(libelle, value)=>{
@@ -50,36 +66,66 @@ class CreateCardboard extends React.Component{
       return;
     }    
     
-    let obj = {};
-    obj[libelle] = value;
-    this.setState(obj);
+    let newCardboard = this.state.cardboard;
+    newCardboard[libelle] = parseInt(value);
+    this.setState({ cardboard: newCardboard });
   }
 
-  changeStateBoolean = (libelle, value)=>{
-    console.log(libelle, value)  
-    let obj = {};
-    obj[libelle] =value;
-    this.setState(obj);
-  }
   changeState = (libelle, value)=>{
-    let obj = {};
-    obj[libelle] = value;
-    this.setState(obj);
+    console.log("libelle/value : ", libelle, value)
+    let newCardboard = this.state.cardboard;
+    newCardboard[libelle] = value;
+    this.setState({ cardboard: newCardboard });
+
+    console.log("state : ", this.state)
   }
 
-  addCardboard = ()=>{
-    var url = "http://obiwan2.univ-brest.fr:7144/addCarton";
+  changeOriginRoom(key){
+    if(key == null){
+      return;
+    }
+    let val = parseInt(key);
+    this.state.selectedOrigin = val;
+    this.state.cardboard.pieceOrigine = this.state.originRoomList[val].id;
+    console.log(this.state);
+  }
+
+  changeDestinationRoom(key){
+    if(key == null){
+      return;
+    }
+    let val = parseInt(key);
+    this.state.selectedDestination= val;
+    this.state.cardboard.pieceArrive = this.state.destinationRoomList[val].id;
+    console.log(this.state);
+  }
+
+  createCardboard = ()=>{
+    console.log("requete", this.state);
+    console.log("chosenContent : ", this.state.chosenContentList);
+    this.state.cardboard.contenus = [];
+    this.state.chosenContentList.forEach(content=>{
+      this.state.cardboard.contenus.push(content.idContenu);
+    })
+    console.log("cartdboard", this.state.cardboard);
+    var url = "http://obiwan2.univ-brest.fr:7144/ajtCarton";
 
     var options = {
         method: 'POST',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(this.state.cardboard),
         headers: { 'Content-Type': 'application/json' }
     }
     
-
-    httpRequest(url, options).then(response=> {
-      // console.log(response);
+    httpRequest(url, options).then(response=> { 
+       window.location.href = "http://localhost:3000/MakeMyCardboards/myCardBoards";
+       alert(response.message);
+    })
+    .catch(error=>{
+      alert(error);
+      
     });
+
+   
   }
 
   getAvailableCardBoardContent = () =>{
@@ -100,7 +146,7 @@ class CreateCardboard extends React.Component{
   }
 
   getRooms= () =>{
-    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/1/2"
+    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/4/3 "
 
     var options = {
       method: 'GET',
@@ -150,20 +196,50 @@ class CreateCardboard extends React.Component{
     }
   }
 
+  changeModal(){
+    this.setState({openModal: !this.state.openModal});
+    console.log('openModal : ', this.state.openModal);
+  }
+
   render(){
     return(
       <div className="container mt-3">
-        <div className="row">
+        <div className="row mb-4">
+         <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
+          <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
+        </cameraModal>
+        
           <div className="col-6">
             <div className="square">
               <div className="content">
                 <div className="table">
-                  <div className="table-cell">
+                  <button className="table-cell" onClick = {(e)=>this.changeModal()}>
                     <svg id="picture" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-camera" viewBox="0 0 16 16">
                       <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
                       <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
                     </svg>
-                  </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
@@ -172,87 +248,92 @@ class CreateCardboard extends React.Component{
           <div className="col-6">
             <div className="form-group">
               <input id="input" type="number" className="form-control" placeholder="N°" 
-              value={this.state.numeroCarton} onChange={ (e) => this.changeStateInt("numeroCarton", e.target.value)}/>
+              value={this.state.cardboard.numeroCarton} onChange={ (e) => this.changeStateInt("numeroCarton", e.target.value)}/>
             </div>
             <div className="circles mb-2">
               <p className="font-weight-bolder mb-1">Etiquette</p>
               <div className="row mx-auto">
                 <div className="col-3">
-                  <button className="btn etiquette1 btn-circle rounded-circle" onClick = { (e) => this.changeState("couleur", "rose")}></button>
+                  <button className="btn etiquette1 btn-circle rounded-circle" onClick = { (e) => this.changeState("couleur", "pink")}></button>
                 </div>
                 <div className="col-3">
-                  <button className="btn etiquette2 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "mauve")}></button>
+                  <button className="btn etiquette2 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "purple")}></button>
                 </div>
                 <div className="col-3">
                   <button className="btn etiquette3 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "cyan")}></button>
                 </div>
                 <div className="col-3">
-                  <button className="btn etiquette4 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "gris")}></button>
+                  <button className="btn etiquette4 btn-circle rounded-circle"  onClick = {(e) => this.changeState("couleur", "grey")}></button>
                 </div>
               </div>
             </div>
-            <div className="form-group mb-0">
+
+            <div className="form-group">
               <div className="form-check">
                   <input className="form-check-input" type="checkbox" id="gridCheck"
-                    checked = {this.state.fragile}
-                   onChange = {(e) => this.changeStateBoolean("fragile", e.target.checked)}/>
+                    checked = {this.state.cardboard.fragile}
+                   onChange = {(e) => this.changeState("fragile", e.target.checked)}/>
                   <label className="form-check-label">Fragile</label>
               </div>
             </div>
           </div>
         </div>
-        <div className="form-group mt-4">
-        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedOrigin}
-        onChange={ (e) => this.changeState("pieceOrigine", e.target.value)}>
-          <option defaultValue>Origine</option>
-          { 
-            this.state.originRoomList.map((room, key) =>{
-            return(
-              <option value={key}>{room.libelle}</option>
-            )         
-            })
-          }
-        </select>
 
-        <select className="form-select" id="input" type="text" className="form-control" value = {this.state.selectedOrigin}
-        onChange={ (e) => this.changeState("pieceDestination", e.target.value)}>
-          <option defaultValue>Destination</option>
-          { 
-            this.state.destinationRoomList.map((room, key) =>{
-            return(
-              <option value={key}>{room.libelle}</option>
-            )         
-            })
-          }
-        </select>
-        </div>
+        <div className="form-group mt-4">
+          <select className="form-select" id="input" type="text" 
+            value = {this.state.selectedOrigin}
+            onChange={ (e) => this.changeOriginRoom(e.target.value)}
+          >
+            <option defaultValue>Origine</option>
+            { 
+              this.state.originRoomList.map((room, key) =>{
+              return(
+                <option value={key}>{room.libelle}</option>
+              )         
+              })
+            }
+          </select>
+        </div> 
+
+        <div className="form-group">
+          <select className="form-select" id="input" type="text" 
+            value = {this.state.selectedDestination}
+            onChange={ (e) => this.changeDestinationRoom(e.target.value)}
+          >
+            <option defaultValue>Destination</option>
+            { 
+              this.state.destinationRoomList.map((room, key) =>{
+              return(
+                <option value={key}>{room.libelle}</option>
+              )         
+              })
+            }
+          </select>
+        </div> 
+
         <div className="form-group mt-4">
           <div className="input-group">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="">Dimensions(cm)  </span>
-            </div>
-            <input type="number" className="form-control" placeholder="Longueur"
-            value={this.state.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
+            <input type="number" className="form-control cardDim" placeholder="Longueur"
+              value={this.state.cardboard.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
             />
-            <input type="number" className="form-control" placeholder="largeur"
-            value={this.state.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
+            <input type="number" className="form-control cardDim" placeholder="largeur"
+              value={this.state.cardboard.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
             />
-            <input type="number" className="form-control" placeholder="hauteur"
-            value={this.state.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
+            <input type="number" className="form-control cardDim" placeholder="hauteur"
+              value={this.state.cardboard.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
             />
-
           </div>
         </div>
-        <div id="cardboard-content" className="mb-4">
+
+        <div id="cardboard-content">
             {
               this.showTitle()
             }
-            
           <div className="row">
             {
             this.state.chosenContentList.map((content, key) =>{
               return(
-                <div className="col-3" idContenu = {this.props.idContenu}  onClick= {() => this.selectContent(key)}> 
+                <div className="col-3 mt-4" idContenu = {this.props.idContenu}  onClick= {() => this.selectContent(key)}> 
                   <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
                 </div>
               )         
@@ -265,18 +346,17 @@ class CreateCardboard extends React.Component{
           {
             this.state.availableContentList.map((content, key) =>{
             return(
-              <div className="col-3" onClick= {() => this.selectContent(key)}> 
+              <div className="col-3 mt-4" onClick= {() => this.selectContent(key)}> 
                 <AvailableContent id={key} title={content.descriptif} />
               </div>
             )         
             })
           }
-          
         </div>
         
-        <div className="row text-center mt-5 mb-3">
-          <div className="col-6">
-            <button className="btn btn-save">Enregistrer</button>
+        <div className="row text-center mt-5 mb-3" >
+          <div className="col-6" >
+            <button className="btn btn-save" onClick = { (e) => this.createCardboard()}>Enregistrer</button>
           </div>
           <div className="col-6">
             <Link to="/MakeMyCardboards/myCardBoards">
@@ -288,5 +368,18 @@ class CreateCardboard extends React.Component{
     )
   }
 }
+
+class CameraComponent extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
+  render(){
+    return(
+      <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
+    )
+  }
+}
+
 
 export default CreateCardboard;
