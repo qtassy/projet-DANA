@@ -22,3 +22,8 @@
     border-color: #44797B;
     color: white;
 }
+
+.erreurCreationCompte {
+    color: red;
+    width: 20%;
+}
