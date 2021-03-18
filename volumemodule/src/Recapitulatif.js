@@ -123,14 +123,22 @@ export class Recapitulatif extends React.Component {
                                         {
                                             x.lstObjets.map((y, j) => {
                                                 return(
-                                                    <div key={"blockCategorie-" + j}>
-                                                        <FontAwesomeIcon key={"img-" + j} icon={faImages} />
-                                                        <p key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</p>
-                                                        <p key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</p>
-                                                        <div key={"calcul-" + j} id={"calcul-" + j}>
-                                                            <p key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</p>
+                                                    <div className={"row"} key={"blockCategorie-" + j}>
+                                                        <div className="col-2">
+                                                            <FontAwesomeIcon key={"img-" + j} icon={faImages} />
+                                                        </div>
+                                                        <div className="col-4">
+                                                            <span key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</span>
+                                                            <span key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</span>
+                                                        </div>
+                                                        <div className="col-2" key={"calcul-" + j}>
+                                                            <span key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
+                                                        </div>
+                                                        <div className="col-2">
                                                             <input type="button" key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} />
                                                             <input type="button" key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} />
+                                                        </div>
+                                                        <div className="col-2">    
                                                             <input type="button" key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} />
                                                         </div>
                                                     </div>
