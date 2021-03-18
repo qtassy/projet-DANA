@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImages } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import './Recapitulatif.scss'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 const fetch = require('node-fetch');
@@ -163,11 +164,11 @@ export class Recapitulatif extends React.Component {
                                                             <span key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
                                                         </div>
                                                         <div className="col-2">
-                                                            <button className={"btn btn-primary incrementButton"} key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + x.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
-                                                            <button className={"btn btn-primary incrementButton"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
+                                                            <button className={"btn btn-primary incrementButtonRecap"} key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + x.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
+                                                            <button className={"btn btn-primary incrementButtonRecap"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
                                                         </div>
                                                         <div className="col-2">    
-                                                            <input type="button" key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} />
+                                                            <button type="button" key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSuppr(e)} /></button>
                                                         </div>
                                                     </div>
                                                 )

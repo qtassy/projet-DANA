@@ -25,3 +25,17 @@
 
 }
 
+.incrementButtonRecap{
+    width: 1.5rem;
+    height: 1.5rem;
+    padding :0px !important;
+    color:white !important;
+    background-color: #FF7276 !important;
+    border:none !important;
+    cursor: pointer;
+    &:hover{
+        color:white !important;
+        background-color: #fa6267 !important;
+    }
+}
+
