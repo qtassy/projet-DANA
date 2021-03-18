@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImages } from '@fortawesome/free-solid-svg-icons'
 import './Recapitulatif.scss'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 const fetch = require('node-fetch');
 
 export class Recapitulatif extends React.Component {
