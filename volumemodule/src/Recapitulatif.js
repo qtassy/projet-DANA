@@ -110,37 +110,39 @@ export class Recapitulatif extends React.Component {
                         <p className={"Title"}><FontAwesomeIcon className={"mt-5 mx-2"} icon={faChevronLeft} /> Récapitulatif</p>
                     </div>
                 </div>
-                <div className={"mt-5"}>
-                    {
-                        [...this.state.recapitulatif.lstCategorie].map((x, i) => {
-                            return(
-                                <React.Fragment>
-                                    <div className={" m-2 justify-content-center row"} key={"titreCategorie-" + i}>
-                                        <p className={"nomCat col-12"} key={"categorie-" + i} id={"categorie-" + i}>{x.categorie}</p>
-                                    </div>
-                                    {
-                                        x.lstObjets.map((y, j) => {
-                                            return(
-                                                <div key={"blockCategorie-" + j}>
-                                                    <FontAwesomeIcon key={"img-" + j} icon={faImages} />
-                                                    <p key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</p>
-                                                    <p key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</p>
-                                                    <div key={"calcul-" + j} id={"calcul-" + j}>
-                                                        <p key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</p>
-                                                        <input type="button" key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} />
-                                                        <input type="button" key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} />
-                                                        <input type="button" key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} />
+                <div className={"row"}>
+                    <div className={"mt-perso"}>
+                        {
+                            [...this.state.recapitulatif.lstCategorie].map((x, i) => {
+                                return(
+                                    <React.Fragment>
+                                        <div className={" m-2 justify-content-center row"} key={"titreCategorie-" + i}>
+                                            <p className={"nomCat col-12"} key={"categorie-" + i} id={"categorie-" + i}>{x.categorie}</p>
+                                        </div>
+                                        {
+                                            x.lstObjets.map((y, j) => {
+                                                return(
+                                                    <div key={"blockCategorie-" + j}>
+                                                        <FontAwesomeIcon key={"img-" + j} icon={faImages} />
+                                                        <p key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</p>
+                                                        <p key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</p>
+                                                        <div key={"calcul-" + j} id={"calcul-" + j}>
+                                                            <p key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</p>
+                                                            <input type="button" key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} />
+                                                            <input type="button" key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} />
+                                                            <input type="button" key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })
-                                        
-                                    }
-                                </React.Fragment>
-                            )
-                            
-                        })
-                    }
+                                                )
+                                            })
+                                            
+                                        }
+                                    </React.Fragment>
+                                )
+                                
+                            })
+                        }
+                    </div>
                 </div>
                 <button  id="boutonValider" onClick={this.valider} >
                     <span>Cette suggestion me convient</span>
