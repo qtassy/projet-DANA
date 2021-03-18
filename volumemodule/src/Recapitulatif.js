@@ -152,7 +152,7 @@ export class Recapitulatif extends React.Component {
                                         {
                                             x.lstObjets.map((y, j) => {
                                                 return(
-                                                    <div className={"row"} key={"blockCategorie-" + j}>
+                                                    <div className={"row borderBot"} key={"blockCategorie-" + j}>
                                                         <div className="col-2">
                                                             <FontAwesomeIcon key={"img-" + j} icon={faImages} />
                                                         </div>
