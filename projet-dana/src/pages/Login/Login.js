@@ -40,7 +40,7 @@ export class Login extends React.Component {
                 'Content-Type': 'application/json'
             }
         };
-        var url = 'http://obiwan2.univ-brest.fr:7155/login'
+        var url = 'http://obiwan2.univ-brest.fr:7145/login'
         fetch(url, requestOptions)
         .then(result => result.json())
         .then(result => {

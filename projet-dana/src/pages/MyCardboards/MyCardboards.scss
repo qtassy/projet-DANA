@@ -1,0 +1,25 @@
+#add-button{
+    background-color: #FF5561;
+    width : 25vw;
+    height : 25vw;
+    max-width: 10rem;
+    max-height: 10rem;
+    border-radius: 10px;
+    position: relative;
+}
+
+.div-icon{
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#cardboard-icon{
+ width: 100%;
+ height: 100%;
+ background-size: contain;
+ color: #E54C57;
+}
