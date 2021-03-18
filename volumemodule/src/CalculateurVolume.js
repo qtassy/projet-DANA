@@ -124,6 +124,30 @@ class App extends React.Component {
     this.setState({ listeActuelle: liste });
   }
 
+  onClickSVGPlus = (e) => {
+    var liste = this.state.listeActuelle;
+    var nom = e.target.parentNode.parentNode.id;
+    ([...liste.lstObjets]).forEach(element => {
+      if (element.libelle === nom.split('^')[1]) {
+        element.quantite += 1;
+        this.child.incrementer();
+      }
+    })
+    this.setState({ listeActuelle: liste });
+  }
+
+  onClickSVGMoins = (e) => {
+    var liste = this.state.listeActuelle;
+    var nom = e.target.parentNode.parentNode.id;
+    ([...liste.lstObjets]).forEach(element => {
+      if (element.libelle === nom.split('^')[1]) {
+        element.quantite = element.quantite - 1 < 0 ? 0 : element.quantite -=1;
+        this.child.decrementer();
+      }
+    })
+    this.setState({ listeActuelle: liste });
+  }
+
   onClickPlus = (e) => {
     var liste = this.state.listeActuelle;
     var nom = e.target.id;
@@ -186,8 +210,9 @@ class App extends React.Component {
           
             {
               this.state.recapitulatif.map((x, i) => {
-                return (<div className="p-1 col-lg-2 col-4 col-sm-3 col-md-3">
-                  <input className={" btn  boutonSelectCat"} type="button" key={i} id={"btnCategorie" + x.categorie} value={x.categorie} onClick={e => this.onClickCategorie(e)} />
+                return (
+                  <div key={"blockBtn^" + i} className="p-1 col-lg-2 col-4 col-sm-3 col-md-3">
+                    <input className={" btn  boutonSelectCat"} type="button" key={i} id={"btnCategorie" + x.categorie} value={x.categorie} onClick={e => this.onClickCategorie(e)} />
                   </div>
                 )
               })
@@ -199,28 +224,28 @@ class App extends React.Component {
             this.state.listeActuelle.lstObjets.map((x, i) => {
               return (
                 <div className={" mt-3 col-4 col-sm-3 col-md-2 "}  key={i} id={"block-" + x.libelle} >
-                   <div className={"row"}>
-                      <div className={"col-12 backgroundObjet itemObjet"}>
-                        <FontAwesomeIcon  icon={faImages} />
+                   <div key={"div^" + i} className={"row"}>
+                      <div key={"blockIcone^" + i} className={"col-12 backgroundObjet itemObjet"}>
+                        <FontAwesomeIcon  key={"icone^" + i} icon={faImages} />
                       </div>
                     </div>
-                    <div className={" row py-1 justify-content-center backgroundObjet"}>
+                    <div key={"css^" + i} className={" row py-1 justify-content-center backgroundObjet"}>
 
-                      <div className={"col-3"}>
-                        <button className={"btn btn-primary incrementButton"} type="image" alt="m" src={faPlus} key={"plus-" + i} id={"btnPlus^" + x.libelle} value="+" onClick={e => this.onClickPlus(e)} > <FontAwesomeIcon icon={faPlus} /></button>
+                      <div key={"blockIncr^" + i} className={"col-3"}>
+                        <button className={"btn btn-primary incrementButton"} type="image" alt="m" src={faPlus} key={"plus-" + i} id={"btnPlus^" + x.libelle} value="+" onClick={e => this.onClickPlus(e)} > <FontAwesomeIcon icon={faPlus} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
                       </div>
-                      <div className={"col-2"}>
+                      <div key={"blockQte^" + i} className={"col-2"}>
                         <p key={"quantite-" + i} id={"quantite-" + x.libelle}>{x.quantite}</p>
                       </div>
-                      <div className={"col-3"}>
-                        <button className={"btn btn-primary incrementButton"} type="button" key={"moins-" + i} id={"btnMoins^" + x.libelle} value="-" onClick={e => this.onClickMoins(e)}> <FontAwesomeIcon icon={faMinus} /> </button> 
+                      <div key={"blockDecr^" + i} className={"col-3"}>
+                        <button className={"btn btn-primary incrementButton"} type="button" key={"moins-" + i} id={"btnMoins^" + x.libelle} value="-" onClick={e => this.onClickMoins(e)} > <FontAwesomeIcon id={"btnMoins^" + x.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /> </button> 
                       </div>
 
                     </div>
-                    <div className={"row"}>
+                    <div key={"blockNom^" + i}className={"row"}>
                         <span key={"nom-" + i} id={"nom-" + x.libelle}>{x.libelle}</span>
                     </div>
-                    <div className={"row"}>
+                    <div key={"blockDim^" + i}className={"row"}>
                         <span key={"dimention-" + i} id={"dimention-" + x.libelle}>{"Dim : ...x..."}</span>
                     </div>    
                     
