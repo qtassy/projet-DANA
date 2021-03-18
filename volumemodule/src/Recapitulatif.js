@@ -157,8 +157,8 @@ export class Recapitulatif extends React.Component {
                                                             <FontAwesomeIcon key={"img-" + j} icon={faImages} />
                                                         </div>
                                                         <div className="col-4">
-                                                            <span key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</span>
-                                                            <span key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</span>
+                                                            <p key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</p>
+                                                            <p key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</p>
                                                         </div>
                                                         <div className="col-2" key={"calcul-" + j}>
                                                             <span key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
@@ -168,7 +168,7 @@ export class Recapitulatif extends React.Component {
                                                             <button className={"btn btn-primary incrementButtonRecap"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
                                                         </div>
                                                         <div className="col-2">    
-                                                            <button type="button" key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSuppr(e)} /></button>
+                                                            <button className={"btn btn-primary suppresionButtonRecap"} key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSuppr(e)} /></button>
                                                         </div>
                                                     </div>
                                                 )
