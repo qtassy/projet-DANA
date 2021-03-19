@@ -134,12 +134,14 @@ export class Recapitulatif extends React.Component {
 
     render() {
         return(
-            <div className={"container"}>
+            <React.Fragment>
                 <div className={"top row"}>
                     <div className={"col"}>
                         <p className={"Title"}><a href="/"><FontAwesomeIcon className={"mt-5 mx-2"} icon={faChevronLeft} /></a> Récapitulatif</p>
                     </div>
                 </div>
+            <div className={"container"}>
+                
                 <div className={"row"}>
                     <div className={"mt-perso"}>
                         {
@@ -165,11 +167,11 @@ export class Recapitulatif extends React.Component {
                                                                 <span  key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
                                                             </p>
                                                         </div>
-                                                        <div className="col-2 justify-content-center boutonRecapIncrem ">
+                                                        <div className="col-1 justify-content-center boutonRecapIncrem ">
                                                             <button className={"btn btn-primary incrementButtonRecap m-2 "} key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + y.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
                                                             <button className={"btn btn-primary incrementButtonRecap m-2"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + y.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
                                                         </div>
-                                                        <div className="col-1 justify-content-center boutonRecapSupp" >    
+                                                        <div className="col-2 justify-content-center boutonRecapSupp" >    
                                                             <button className={"btn btn-primary suppresionButtonRecap"} key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + y.libelle} onClick={e => this.onClickSuppr(e)} /></button>
                                                         </div>
                                                     </div>
@@ -199,6 +201,7 @@ export class Recapitulatif extends React.Component {
                     </div>
                 </div>
             </div>
+            </React.Fragment> 
         )
     }
 }
