@@ -208,9 +208,9 @@ class CreateCardboard extends React.Component{
     return(
       <div className="container mt-3">
         <div className="row mb-4">
-         <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
+        {/* <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
           <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
-        </cameraModal>
+        </cameraModal> */}
         
           <div className="col-6">
             <div className="square">
