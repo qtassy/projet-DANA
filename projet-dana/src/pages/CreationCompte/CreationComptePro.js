@@ -108,6 +108,7 @@ export class CreationComptePro extends Component {
     render() {
         return (
             <div className={"formCreationCompte"}>
+                <h1>Création d'un compte professionnel</h1>
                 <form onSubmit={this.valider}>
                     <div className={"form-group"}>
                         <input type={"text"} className={"form-control elementFormCreationCompte"} id={"nom"}

@@ -88,6 +88,11 @@ export class CreationCompteClient extends Component {
         }
     }
 
+    /**
+     * Met le numéro de téléphone au format "xx xx xx xx xx"
+     * @param {String} telephone le numéro de téléphone à formatter
+     * @returns Le numéro de téléphone formatté
+     */
     formatterTelephone(telephone) {
         let res = "";
 
@@ -108,6 +113,7 @@ export class CreationCompteClient extends Component {
     render() {
         return (
             <div className={"formCreationCompte"}>
+                <h1>Création d'un compte client</h1>
                 <form onSubmit={this.valider}>
                     <div className={"form-group"}>
                         <input type={"text"} className={"form-control elementFormCreationCompte"} id={"nom"}
