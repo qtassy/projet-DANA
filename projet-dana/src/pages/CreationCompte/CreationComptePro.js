@@ -82,8 +82,11 @@ export class CreationComptePro extends Component {
             fetch(url, requestOptions)
                 .then(response => response.json())
                 .then(data => {
-                    this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel });
-                    window.location.href = "/login";
+                    if(data.erreurMail !== undefined || data.erreurTel !== undefined){
+                        this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel })
+                    } else {
+                        window.location.href = "/";
+                    }
                 })
                 .catch(error => console.error(error));
         } else {
