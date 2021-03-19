@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
-import Camera from 'react-html5-camera-photo';
+// import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 // import cameraModal from '../../components/cameraModal/cameraModal';
 
@@ -22,7 +22,7 @@ class CreateCardboard extends React.Component{
         longueur : null,//double
         couleur : "",//string
         fragile : null,//int
-        poids : null,//double
+        poids : 0,//double
         image : "",//data uri (string)
       },  
 
@@ -103,7 +103,7 @@ class CreateCardboard extends React.Component{
     this.setState(prevState => {
       let cardboard = Object.assign({}, prevState.cardboard); 
       let destinationRoomList = Object.assign({}, prevState.destinationRoomList);
-      cardboard.destinationRoomList = destinationRoomList[val].id;                     
+      cardboard.pieceArrive = destinationRoomList[val].id;                     
       return { cardboard };                                 
     })
     console.log(this.state);
@@ -132,6 +132,7 @@ class CreateCardboard extends React.Component{
         headers: { 'Content-Type': 'application/json' }
     }
     
+    console.log('state : ', this.state);
     httpRequest(url, options).then(response=> { 
        window.location.href = "http://localhost:3000/MakeMyCardboards/myCardBoards";
        alert(response.message);

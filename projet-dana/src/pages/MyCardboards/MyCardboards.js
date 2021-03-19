@@ -34,7 +34,8 @@ class MyCardboards extends React.Component {
     var options = {
       method: 'GET',
       body: null,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 
+      'Access-Control-Allow-Origin': '*'}
     }
 
     console.log("requete")
