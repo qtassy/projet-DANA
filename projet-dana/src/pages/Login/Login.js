@@ -49,10 +49,10 @@ export class Login extends React.Component {
                 document.getElementById("etat").innerHTML = "Pas connecté !"
             }else{
                 document.getElementById("etat").innerHTML = "Connecté !"  
-                this.setState({valid : true})
-                this.setState({idUtilisateur : result.id});
-                localStorage.setItem("idUtilisateur", result.id)
-                localStorage.setItem("admin", result.admin)
+                // this.setState({valid : true})
+                localStorage.setItem("clientId", result.idClient);
+                localStorage.setItem("accountId", result.idCompte);
+                localStorage.setItem("accountType", result.typeCompte);
                 window.location.href = "/home";
             }
         });
@@ -60,25 +60,25 @@ export class Login extends React.Component {
 
     render(){
         
-      return(
-          
-        <div className={"centerLogin"} >
-            <form className={"formulaire"} onSubmit={this.submit}>
-                <div className={"identification"} >
-                    <input type="text" name="login" onChange={this.changeLogin} required ></input>
-                    <label htmlFor="login"> Nom d'utilisateur </label>
-                </div>
-                <div className={"identification"}> 
-                    <input  className={"bottom"} type="text" name="pass" onChange={this.changePass} required></input>
-                    <label htmlFor="pass"> Mot de passe </label>
-                </div>
-                <p id="etat"></p>
-                <button className={"submit"} id="submit" type="submit">Connexion</button>
-
-            </form>
-        </div>
+    return(
         
-      )
+    <div className={"centerLogin"} >
+        <form className={"formulaire"} onSubmit={this.submit}>
+            <div className={"identification"} >
+                <input type="text" name="login" onChange={this.changeLogin} required ></input>
+                <label htmlFor="login"> Nom d'utilisateur </label>
+            </div>
+            <div className={"identification"}> 
+                <input  className={"bottom"} type="text" name="pass" onChange={this.changePass} required></input>
+                <label htmlFor="pass"> Mot de passe </label>
+            </div>
+            <p id="etat"></p>
+            <button className={"submit"} id="submit" type="submit">Connexion</button>
+
+        </form>
+    </div>
+    
+    )
      
     }
 }
