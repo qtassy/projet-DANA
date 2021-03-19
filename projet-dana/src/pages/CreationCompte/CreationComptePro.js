@@ -81,7 +81,10 @@ export class CreationComptePro extends Component {
             
             fetch(url, requestOptions)
                 .then(response => response.json())
-                .then(data => this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel }))
+                .then(data => {
+                    this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel });
+                    window.location.href = "/login";
+                })
                 .catch(error => console.error(error));
         } else {
             this.setState({erreurMdp : "Les mots de passes ne correspondent pas"})
@@ -108,6 +111,7 @@ export class CreationComptePro extends Component {
     render() {
         return (
             <div className={"formCreationCompte"}>
+                <h1>Création d'un compte professionnel</h1>
                 <form onSubmit={this.valider}>
                     <div className={"form-group"}>
                         <input type={"text"} className={"form-control elementFormCreationCompte"} id={"nom"}

@@ -16,7 +16,7 @@ export class Page extends Component {
 
     getCartons() {
         // TODO : récupérer l'id de la pièce dynamiquement
-        const url = 'http://obiwan2.univ-brest.fr:7144/cartonsPiece/6';
+        const url = 'http://obiwan2.univ-brest.fr:7144/cartonsPiece/' + localStorage.getItem("idPiece");
 
         const requestOptions = {
             method: 'GET',

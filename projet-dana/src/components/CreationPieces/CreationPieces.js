@@ -19,7 +19,7 @@ export class CreationPieces extends Component {
     }
 
     setNomPiece(event, index) {
-        // 1. On fait une copie superficielle des éléments
+        // 1. On fait une copie superficielle des éléments (on prends juste les valeurs)
         let pieces = [...this.state.pieces];
 
         // 2. On fait une copie superficielle de l'élément qu'on souhaite modifier

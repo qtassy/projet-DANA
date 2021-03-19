@@ -17,7 +17,7 @@ export class Etiquette extends Component {
                     {this.props.origine + ' → ' + this.props.destination}
                 </div>
                 <div>
-                    <   QRCode  value={"https://www.youtube.com/"}
+                    <QRCode  value={"https://www.youtube.com/"}
                                 size={256}
                                 imageSettings={{
                                     src: logo,

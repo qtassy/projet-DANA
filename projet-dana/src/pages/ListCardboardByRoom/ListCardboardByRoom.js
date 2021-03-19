@@ -100,7 +100,9 @@ class ListCardboard extends React.Component{
                         </div>
                     </div>
                 </div>
-                <button className="btn btn-edit-card">Éditer mes étiquettes</button>
+                <button className="btn btn-edit-card" onClick = {(e)=>window.location.href = "/Etiquettes"}>
+                    Éditer mes étiquettes
+                </button>
             </>
             
         )
