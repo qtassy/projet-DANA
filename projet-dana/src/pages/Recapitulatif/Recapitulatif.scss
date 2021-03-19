@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.top{
+    -webkit-box-shadow: 0px 7px 10px 0px rgba(209, 209, 209, 0.75);
+    -moz-box-shadow: 0px 7px 10px 0px rgba(209, 209, 209, 0.75);
+    box-shadow: 0px 7px 10px 0px rgba(209, 209, 209, 0.75);
+    position: fixed;
+    background-color: white;
+    width:100%;
+    top: 0;
+    margin : unset !important;
+
+}
+
+.nomCat{
+    color : #FF7276 !important; 
+    font-family: 'Roboto', sans-serif;
+    font-size:20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+
+.mt-perso{
+    margin-top : 7rem !important;
+    padding-left: 10px !important;
+}
+
+.incrementButtonRecap{
+    width: 1.5rem;
+    height: 1.5rem;
+    padding :0px !important;
+    color:white !important;
+    background-color: #FF7276 !important;
+    border:none !important;
+    cursor: pointer;
+    &:hover{
+        color:white !important;
+        background-color: #fa6267 !important;
+    }
+}
+
+.suppresionButtonRecap{
+    padding :0px !important;
+    color:#707070 !important;
+    background-color: white !important;
+    border:none !important;
+    cursor: pointer;
+
+}
+
+
+.borderBot{
+    border-bottom: 1px solid rgba(206, 206, 206, 0.329);
+}
+
+
+.centerDot{
+
+    display:flex;
+
+    .dot {
+        height: 4rem; 
+        width: 4rem;
+        background-color: #f2f2f2;
+        border-radius: 50%;
+        line-height: 4rem;   
+        margin:auto !important;
+
+      }
+}
+
+.centerImg{
+    display: flex;
+    line-height: 3rem;
+    .imgRecap{
+        font-size:3rem !important;
+        margin: auto !important;
+    }
+}
+
+
+.boutonRecapIncrem{
+    margin: auto  !important;
+}
+
+.boutonRecapSupp{
+    margin: auto !important;
+    display: grid;
+
+}
+
+
+.boutonRecapValider{
+    border-radius: 3rem !important;
+    background-color: #FF7276 !important;
+    line-height:3rem !important;
+    border-color: #FF7276 !important;
+    &:hover{
+        background-color: #fa6267 !important;
+        border-color: #fa6267 !important; 
+    }
+    p{
+        margin: unset  !important;
+        font-family: 'Roboto', sans-serif;
+        font-size:18px;
+        letter-spacing: 0.5px;
+    }
+}
+
+.boutonRecapPerso{
+    background-color:white !important;
+    line-height:1.5rem !important;
+    border-color: white !important;
+    color: #7c7d7e !important;
+    p{
+        margin: auto  !important;
+        font-family: 'Roboto', sans-serif;
+        font-size:18px;
+        letter-spacing: 0.5px; 
+    }
+}
+
+a, a:active, a:checked,a:focus, a:active:focus, a:visited{
+    color:black;
+}
