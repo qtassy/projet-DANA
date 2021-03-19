@@ -1,3 +1,17 @@
+.btn-add-card1, .btn-add-card2{
+    display: block;
+    width: 70%;
+    margin: 0 auto;
+    color: white;
+    border-radius: 30px;
+    height: 50px;
+    background-color: #FF5561;
+
+    &:hover{
+        color: white;
+    }
+}
+
 #add-button{
     background-color: #FF5561;
     width : 25vw;

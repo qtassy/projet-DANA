@@ -34,11 +34,13 @@ class MyCardboards extends React.Component {
     var options = {
       method: 'GET',
       body: null,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 
+      'Access-Control-Allow-Origin': '*'}
     }
 
     console.log("requete")
     httpRequest(url, options).then(rooms=> {
+      console.log("rooms : ", rooms);
       console.log("response : " + rooms.pieces);
       this.setState({roomList : rooms.pieces});
       console.log(this.state);
@@ -55,6 +57,14 @@ class MyCardboards extends React.Component {
         <NavMyCardboards link="/MakeMyCardboards" />
         <div className="container">
           <div className="row">
+            <div className="col-6">
+              <button className="btn btn-add-card1 mb-5">Ajouter une piece d'origine</button>
+            </div>
+            <div className="col-6">
+              <button className="btn btn-add-card2 mb-5">Ajouter une piece de destination</button>
+            </div>
+          </div>
+          <div className="row">
             <div className="col-4 col-md-3">
               <div id="add-button">
                 <a href="/MakeMyCardboards/myCardBoards/createCardboard">
@@ -69,7 +79,7 @@ class MyCardboards extends React.Component {
             {console.log(this.getState)}
             {
               this.getState().roomList.map((room, index) => 
-              <Piece  key={index} number = {room.nb} roomName = {room.libelle}/>
+              <Piece  key={index} number = {room.nb} roomName = {room.libelle} idPiece = {room.idPiece}/>
             )}
           </div>
         </div>
