@@ -11,6 +11,10 @@ export class Resume extends React.Component{
         }
     }
 
+    /**
+     * Évènement de clique sur le bouton de validation
+     * Apelle la fonction submit() du composant père (CalculateurVolume) recus en props.
+     */
     submit = () => {
         var data = {
             nbElements : this.state.nbElements,
@@ -19,11 +23,17 @@ export class Resume extends React.Component{
         this.props.validation(data);
     }
 
+    /**
+     * Fonction d'incrémentation du nombre d'éléments total du récapitulatif (this.state.nbElements)
+     */
     incrementer = () => {
         var nb = this.state.nbElements + 1;
         this.setState({ nbElements : nb });
     }
 
+    /**
+     * Fonction de décrémentation du nombre d'éléments total du récapitulatif (this.state.nbElements)
+     */
     decrementer = () => {
         var nb = this.state.nbElements - 1;
         if(nb < 0){
