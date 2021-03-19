@@ -51,8 +51,8 @@ class ListCardboard extends React.Component{
         this.getCardboards();
     }
 
-    getCardboards = () =>{
-        var url = "http://obiwan2.univ-brest.fr:7144/cartonsPiece/20";
+    getCardboards = () =>{  
+        var url = "http://obiwan2.univ-brest.fr:7144/cartonsPiece/" + localStorage.getItem("idPiece");
     
         var options = {
             method: 'GET',
@@ -82,7 +82,7 @@ class ListCardboard extends React.Component{
         return(
             <>
                 <NavMyCardboards link="/MakeMyCardboards/myCardBoards"/>
-                <h1 className="font-weight-bolder text-center title mt-3 mb-3">CUISINE</h1>
+                <h1 className="font-weight-bolder text-center title mt-3 mb-3">{localStorage.getItem("nomPiece")}</h1>
                 <div className="container">
                     <div className="cardboard mx-auto">
                         <div className="row image">

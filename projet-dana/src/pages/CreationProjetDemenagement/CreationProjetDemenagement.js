@@ -84,6 +84,8 @@ export class CreationProjetDemenagement extends Component {
             console.log("response : " + response);
             localStorage.setItem("origin", response.origin);
             localStorage.setItem("destination", response.destination);
+            localStorage.setItem("texteBoutonAnnulation", "Ajouter plus tard");
+            localStorage.setItem("lienBoutonAnnulation", "/CreationPiecesFutur");
             window.location.href = "/CreationPiecesOrigine";
         }) 
         .catch(error => {
@@ -110,15 +112,17 @@ export class CreationProjetDemenagement extends Component {
 
                     <div className={"form-group"}>
                         <input type="text" 
-                            className={"form-control elementFormConnaissance"} id={"adresseActuelle"} aria-describedby={"adresseActuelle"}
-                            placeholder={"Adresse de votre logement actuel"} value={this.state.adresseActuelle} 
+                            className={"form-control elementFormConnaissance"} id={"adresseActuelle"}
+                            aria-describedby={"adresseActuelle"} placeholder={"Adresse de votre logement actuel"}
+                            value={this.state.adresseActuelle} 
                             onChange={this.setAdresseActuelle}/>
                     </div>
 
                     <div className={"form-group"}>
                         <input type="text" 
                             className={"form-control elementFormConnaissance"} id={"adresseFutur"} aria-describedby={"adresseFutur"}
-                            placeholder={"Adresse de votre futur logement"} value={this.state.adresseFutur} onChange={this.setAdresseFutur}/>
+                            placeholder={"Adresse de votre futur logement"} value={this.state.adresseFutur}
+                            onChange={this.setAdresseFutur}/>
                     </div>
 
                     <button type="submit" className={"btn elementFormConnaissance"} id={"validerFormConnaissance"}>Valider</button>

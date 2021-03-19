@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './CreateCardboard.scss';
 import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
-import Camera from 'react-html5-camera-photo';
+// import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 // import cameraModal from '../../components/cameraModal/cameraModal';
 
@@ -21,7 +21,7 @@ class CreateCardboard extends React.Component{
         hauteur : null,//double
         longueur : null,//double
         couleur : "",//string
-        fragile : false,//int
+        fragile : null,//int
         poids : 0,//double
         image : "",//data uri (string)
       },  
@@ -85,9 +85,13 @@ class CreateCardboard extends React.Component{
       return;
     }
     let val = parseInt(key);
-    this.state.selectedOrigin = val;
-    this.state.cardboard.pieceOrigine = this.state.originRoomList[val].id;
-    console.log(this.state);
+    this.setState({selectedOrigin:val});
+    this.setState(prevState => {
+      let cardboard = Object.assign({}, prevState.cardboard); 
+      let originRoomList = Object.assign({}, prevState.originRoomList); 
+      cardboard.pieceOrigine = originRoomList[val].id;                       
+      return { cardboard };                                
+    })
   }
 
   changeDestinationRoom(key){
@@ -95,15 +99,27 @@ class CreateCardboard extends React.Component{
       return;
     }
     let val = parseInt(key);
-    this.state.selectedDestination= val;
-    this.state.cardboard.pieceArrive = this.state.destinationRoomList[val].id;
+    this.setState({selectedDestination:val});
+    this.setState(prevState => {
+      let cardboard = Object.assign({}, prevState.cardboard); 
+      let destinationRoomList = Object.assign({}, prevState.destinationRoomList);
+      cardboard.pieceArrive = destinationRoomList[val].id;                     
+      return { cardboard };                                 
+    })
     console.log(this.state);
   }
 
   createCardboard = ()=>{
     console.log("requete", this.state);
     console.log("chosenContent : ", this.state.chosenContentList);
-    this.state.cardboard.contenus = [];
+    //this.state.cardboard.contenus = [];
+
+    this.setState(prevState => {
+      let cardboard = Object.assign({}, prevState.cardboard);  
+      cardboard.contenus = [];                   
+      return { cardboard };                                
+    })
+
     this.state.chosenContentList.forEach(content=>{
       this.state.cardboard.contenus.push(content.idContenu);
     })
@@ -116,6 +132,7 @@ class CreateCardboard extends React.Component{
         headers: { 'Content-Type': 'application/json' }
     }
     
+    console.log('state : ', this.state);
     httpRequest(url, options).then(response=> { 
        window.location.href = "http://localhost:3000/MakeMyCardboards/myCardBoards";
        alert(response.message);
@@ -228,21 +245,21 @@ class CreateCardboard extends React.Component{
           </div>
 
 
-          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   ...
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" className="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
@@ -287,7 +304,7 @@ class CreateCardboard extends React.Component{
             value = {this.state.selectedOrigin}
             onChange={ (e) => this.changeOriginRoom(e.target.value)}
           >
-            <option selected>Origine</option>
+            <option defaultValue>Origine</option>
             { 
               this.state.originRoomList.map((room, key) =>{
               return(
@@ -303,7 +320,7 @@ class CreateCardboard extends React.Component{
             value = {this.state.selectedDestination}
             onChange={ (e) => this.changeDestinationRoom(e.target.value)}
           >
-            <option selected>Destination</option>
+            <option defaultValue>Destination</option>
             { 
               this.state.destinationRoomList.map((room, key) =>{
               return(
@@ -337,7 +354,7 @@ class CreateCardboard extends React.Component{
             this.state.chosenContentList.map((content, key) =>{
               return(
                 <div className="col-3 mt-4" idContenu = {this.props.idContenu}  onClick= {() => this.selectContent(key)}> 
-                  <AvailableContent id={key} content={content.idContenu} title={content.descriptif} />
+                  <AvailableContent content={content.idContenu} title={content.descriptif} />
                 </div>
               )         
             })
@@ -350,7 +367,7 @@ class CreateCardboard extends React.Component{
             this.state.availableContentList.map((content, key) =>{
             return(
               <div className="col-3 mt-4" onClick= {() => this.selectContent(key)}> 
-                <AvailableContent id={key} title={content.descriptif} />
+                <AvailableContent title={content.descriptif} />
               </div>
             )         
             })
@@ -372,17 +389,17 @@ class CreateCardboard extends React.Component{
   }
 }
 
-class CameraComponent extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {};
-  }
-  render(){
-    return(
-      <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
-    )
-  }
-}
+// class CameraComponent extends React.Component{
+//   constructor(props){
+//     super(props);
+//     this.state = {};
+//   }
+//   render(){
+//     return(
+//       <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
+//     )
+//   }
+// }
 
 
 export default CreateCardboard;

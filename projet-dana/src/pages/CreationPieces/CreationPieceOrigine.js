@@ -6,7 +6,9 @@ export class CreationPiecesOrigine extends Component {
         return(
             <div className={"pageCreationPiece"}>
                 <h1 className={"titreLogement"}>Pièces du logement d'origine</h1>
-                <CreationPieces idLogement="origin" redirect="/CreationPiecesFutur" />
+                <CreationPieces idLogement="origin"
+                                redirect="/CreationPiecesFutur"
+                />
             </div>
         )
     }
