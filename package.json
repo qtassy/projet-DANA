@@ -1,5 +1,13 @@
 {
+<<<<<<< HEAD
+    "name": "projet-DANA",
+    "lockfileVersion": 2,
+    "requires": true,
+    "packages": {}
+  }
+=======
   "dependencies": {
     "node-fetch": "^2.6.1"
   }
 }
+>>>>>>> 90360efa3bc8cfb63e1f7043d03302324bd73480

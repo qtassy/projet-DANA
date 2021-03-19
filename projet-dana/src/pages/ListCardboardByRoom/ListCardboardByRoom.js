@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import './ListCardboardByRoom.scss';
 import NavMyCardboards from "../../components/Menu/NavMyCardboard";
 import ImageCartonExemple from "../../img/carton.jpg";
+import {httpRequest} from '../../services/httpRequestService';
 
 class CardBoard extends React.Component{
+
     render(){
         return(
             <div className="col-xs-12 col-lg-6 mb-5">
@@ -40,6 +42,42 @@ class CardBoard extends React.Component{
 }
 
 class ListCardboard extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+          cardboard: []
+        }
+
+        this.getCardboards();
+    }
+
+    getCardboards = () =>{
+        var url = "http://obiwan2.univ-brest.fr:7144/cartonsPiece/20";
+    
+        var options = {
+            method: 'GET',
+            body: null,
+            headers: { 'Content-Type': 'application/json' }
+        }
+        
+        httpRequest(url, options).then(response=> { 
+            this.setState({
+                cardboard: response
+            })
+        })
+        .catch(error=>{
+            console.log("erreur : ", error);
+        });
+    }
+
+    getDim(longueur, largeur){
+        return longueur + "x" + largeur;
+    }
+
+    getState =()=>{
+        return this.state;
+    }
+
     render(){
         return(
             <>
@@ -48,34 +86,17 @@ class ListCardboard extends React.Component{
                 <div className="container">
                     <div className="cardboard mx-auto">
                         <div className="row image">
-                            <CardBoard 
-                                image={ImageCartonExemple} 
-                                num={1}
-                                origine="Cuisine"
-                                destination="Cuisine"
-                                dimension="50x50"
-                            />
-                            <CardBoard 
-                                image={ImageCartonExemple} 
-                                num={2}
-                                origine="Cuisine"
-                                destination="Cellier"
-                                dimension="50x50"
-                            />
+
+                        {
+                        this.state.cardboard.map( (cardboard, index)=> 
                             <CardBoard 
                             image={ImageCartonExemple} 
-                            num={3}
-                            origine="Cuisine"
-                            destination="Cuisine"
-                            dimension="50x50"
+                            num={cardboard.numeroCarton}
+                            origine={cardboard.origine}
+                            destination={cardboard.destination}
+                            dimension = {this.getDim(cardboard.longueur, cardboard.largeur)}
                             />
-                            <CardBoard 
-                            image={ImageCartonExemple} 
-                            num={4}
-                            origine="Cuisine"
-                            destination="Cuisine"
-                            dimension="50x50"
-                            />
+                        )}
                         </div>
                     </div>
                 </div>

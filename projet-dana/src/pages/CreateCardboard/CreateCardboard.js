@@ -208,9 +208,9 @@ class CreateCardboard extends React.Component{
     return(
       <div className="container mt-3">
         <div className="row mb-4">
-         {/* <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
+         <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
           <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
-        </cameraModal> */}
+        </cameraModal>
         
           <div className="col-6">
             <div className="square">
@@ -250,7 +250,7 @@ class CreateCardboard extends React.Component{
 
           <div className="col-6">
             <div className="form-group">
-              <input id="input" type="number" className="form-control" placeholder="N°" 
+              <input id="input" type="number" className="form-control" placeholder="N°" required
               value={this.state.cardboard.numeroCarton} onChange={ (e) => this.changeStateInt("numeroCarton", e.target.value)}/>
             </div>
             <div className="circles mb-2">
@@ -283,11 +283,11 @@ class CreateCardboard extends React.Component{
         </div>
 
         <div className="form-group mt-4">
-          <select className="form-select" id="input" type="text" 
+          <select className="form-select" id="input" type="text" required
             value = {this.state.selectedOrigin}
             onChange={ (e) => this.changeOriginRoom(e.target.value)}
           >
-            <option defaultValue>Origine</option>
+            <option selected>Origine</option>
             { 
               this.state.originRoomList.map((room, key) =>{
               return(
@@ -299,11 +299,11 @@ class CreateCardboard extends React.Component{
         </div> 
 
         <div className="form-group">
-          <select className="form-select" id="input" type="text" 
+          <select className="form-select" id="input" type="text" required
             value = {this.state.selectedDestination}
             onChange={ (e) => this.changeDestinationRoom(e.target.value)}
           >
-            <option defaultValue>Destination</option>
+            <option selected>Destination</option>
             { 
               this.state.destinationRoomList.map((room, key) =>{
               return(
@@ -316,13 +316,13 @@ class CreateCardboard extends React.Component{
 
         <div className="form-group mt-4">
           <div className="input-group">
-            <input type="number" className="form-control cardDim" placeholder="Longueur"
+            <input type="number" className="form-control cardDim" placeholder="Longueur" required
               value={this.state.cardboard.longueur} onChange={ (e) => this.changeStateInt("longueur", e.target.value)}
             />
-            <input type="number" className="form-control cardDim" placeholder="largeur"
+            <input type="number" className="form-control cardDim" placeholder="largeur" required
               value={this.state.cardboard.largeur} onChange={ (e) => this.changeStateInt("largeur", e.target.value)}
             />
-            <input type="number" className="form-control cardDim" placeholder="hauteur"
+            <input type="number" className="form-control cardDim" placeholder="hauteur" required
               value={this.state.cardboard.hauteur} onChange={ (e) => this.changeStateInt("hauteur", e.target.value)}
             />
           </div>

@@ -32,7 +32,7 @@ export class Recapitulatif extends React.Component {
             if(element.categorie === cat){
                 element.lstObjets.forEach((obj) => {
                     if(obj.libelle === libelle){
-                        obj.quantite = obj.quantite + 1 < 0 ? 0 : obj.quantite + 1;
+                        obj.quantite = obj.quantite + 1;
                         liste.nbElements = liste.nbElements + 1;
                     }
                 })
@@ -42,8 +42,8 @@ export class Recapitulatif extends React.Component {
     }
 
     onClickMoins = (e) => {
-        var cat = e.target.id.split('-')[1];
-        var libelle = e.target.id.split('-')[2];
+        var cat = e.target.id.split('^')[1];
+        var libelle = e.target.id.split('^')[2];
         var liste = this.state.recapitulatif;
         [...liste.lstCategorie].forEach((element) => {
             if(element.categorie === cat){
@@ -62,40 +62,59 @@ export class Recapitulatif extends React.Component {
     }
 
     onClickSVGPlus = (e) => {
-        /*var liste = this.state.listeActuelle;
-        var nom = e.target.parentNode.parentNode.id;
-        ([...liste.lstObjets]).forEach(element => {
-          if (element.libelle === nom.split('^')[1]) {
-            element.quantite += 1;
-            this.child.incrementer();
-          }
+        var cat = e.target.parentNode.id.split('^')[1];
+        var libelle = e.target.parentNode.id.split('^')[2];
+        var liste = this.state.recapitulatif;
+        [...liste.lstCategorie].forEach((element) => {
+            if(element.categorie === cat){
+                element.lstObjets.forEach((obj) => {
+                    if(obj.libelle === libelle){
+                        obj.quantite = obj.quantite + 1;
+                        liste.nbElements = liste.nbElements + 1;
+                    }
+                })
+            }
         })
-        this.setState({ listeActuelle: liste });*/
+        this.setState({ recapitulatif : liste });
       }
     
       onClickSVGMoins = (e) => {
-       /* var liste = this.state.listeActuelle;
-        var nom = e.target.parentNode.parentNode.id;
-        ([...liste.lstObjets]).forEach(element => {
-          if (element.libelle === nom.split('^')[1]) {
-            element.quantite = element.quantite - 1 < 0 ? 0 : element.quantite -=1;
-            this.child.decrementer();
-          }
+        var cat = e.target.parentNode.id.split('^')[1];
+        var libelle = e.target.parentNode.id.split('^')[2];
+        var liste = this.state.recapitulatif;
+        [...liste.lstCategorie].forEach((element) => {
+            if(element.categorie === cat){
+                element.lstObjets.forEach((obj) => {
+                    if(obj.libelle === libelle){
+                        obj.quantite = obj.quantite - 1 < 0 ? 0 : obj.quantite - 1;
+                        liste.nbElements = liste.nbElements - 1 < 0 ? 0 : liste.nbElements - 1;
+                        if(obj.quantite === 0){
+                            this.suppressionObjet(cat, libelle);
+                        }
+                    }
+                })
+            }
         })
-        this.setState({ listeActuelle: liste });*/
+        this.setState({ recapitulatif : liste });
       }
 
       
 
+    onClickSVGSuppr = (e) => {
+        var cat = e.target.parentNode.id.split('^')[1];
+        var libelle = e.target.parentNode.id.split('^')[2];
+        this.suppressionObjet(cat, libelle);
+    }
+
     onClickSuppr = (e) => {
-        var cat = e.target.id.split('-')[1];
-        var libelle = e.target.id.split('-')[2];
+        var cat = e.target.id.split('^')[1];
+        var libelle = e.target.id.split('^')[2];
         this.suppressionObjet(cat, libelle);
     }
 
     suppressionObjet = (categorie, libelle) => {
         var liste = this.state.recapitulatif;
-        [...liste.lstCategorie].forEach((element) => {
+        [...liste.lstCategorie].forEach((element, indexLst) => {
             if(element.categorie === categorie){
                 var index = -1;
                 var quantite = -1;
@@ -111,6 +130,9 @@ export class Recapitulatif extends React.Component {
                     index = -1;
                     element.lstObjets = listeObjets;
                     liste.nbElements = liste.nbElements - quantite < 0 ? 0 : liste.nbElements - quantite;
+                }
+                if(element.lstObjets.length === 0){
+                    liste.lstCategorie.splice(indexLst, 1);
                 }
             }
         })
@@ -134,12 +156,14 @@ export class Recapitulatif extends React.Component {
 
     render() {
         return(
-            <div className={"container"}>
+            <React.Fragment>
                 <div className={"top row"}>
                     <div className={"col"}>
                         <p className={"Title"}><a href="/"><FontAwesomeIcon className={"mt-5 mx-2"} icon={faChevronLeft} /></a> Récapitulatif</p>
                     </div>
                 </div>
+            <div className={"container"}>
+                
                 <div className={"row"}>
                     <div className={"mt-perso"}>
                         {
@@ -165,12 +189,12 @@ export class Recapitulatif extends React.Component {
                                                                 <span  key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
                                                             </p>
                                                         </div>
-                                                        <div className="col-2 justify-content-center boutonRecapIncrem ">
-                                                            <button className={"btn btn-primary incrementButtonRecap m-2 "} key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + y.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
-                                                            <button className={"btn btn-primary incrementButtonRecap m-2"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + y.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
+                                                        <div className="col-1 justify-content-center boutonRecapIncrem ">
+                                                            <button className={"btn btn-primary incrementButtonRecap m-2 "} key={"moins-" + j} id={"btnMoins^" + x.categorie + "^" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + x.categorie + "^" + y.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
+                                                            <button className={"btn btn-primary incrementButtonRecap m-2 "} key={"plus-" + j} id={"btnPlus^" + x.categorie + "^" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + x.categorie + "^" + y.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
                                                         </div>
-                                                        <div className="col-1 justify-content-center boutonRecapSupp" >    
-                                                            <button className={"btn btn-primary suppresionButtonRecap"} key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + y.libelle} onClick={e => this.onClickSuppr(e)} /></button>
+                                                        <div className="col-2 justify-content-center boutonRecapSupp">    
+                                                            <button className={"btn btn-primary suppresionButtonRecap"} key={"suppr-" + j} id={"btnSuppr^" + x.categorie + "^" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnSuppr^" + x.categorie + "^" + y.libelle} onClick={e => this.onClickSVGSuppr(e)} /></button>
                                                         </div>
                                                     </div>
                                                 )
@@ -199,6 +223,7 @@ export class Recapitulatif extends React.Component {
                     </div>
                 </div>
             </div>
+            </React.Fragment> 
         )
     }
 }
