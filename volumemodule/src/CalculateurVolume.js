@@ -199,14 +199,13 @@ class App extends React.Component {
   render() {
     return (
       
-    <React.Fragment>
-      <div className={"top row"}>
+<React.Fragment>
+      <div className={"container"}>
+        <div className={"top row"}>
           <div className={"col-12"}>
             <p className={"Title"}><FontAwesomeIcon className={"mt-5 mx-2"} icon={faChevronLeft} /> Calculateur de volume</p>
           </div>
         </div>
-      <div className={"container"}>
-        
         <div className={"p-1 row menuSelectCat "} id="block-categorie">
           
             {
