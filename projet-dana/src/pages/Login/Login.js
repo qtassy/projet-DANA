@@ -87,9 +87,14 @@ export class Login extends React.Component {
             </div>
             <p id="etat"></p>
             <button className={"submit"} id="submit" type="submit">Connexion</button>
-            <button type="button" class="btn btn-light" onClick = {(e)=>this.redirectToClientPage()}>Je n'ai pas de compte utilisateur </button>
-            <button type="button" class="btn btn-light" onClick = {(e)=>this.redirectToProPage()}>Je n'ai pas de compte professionnel</button>
-
+            <div className={"row text-center mt-4"}>
+                <button className={" btn btn-primary boutonCreateUser"}  onClick = {(e)=>this.redirectToProPage()}>
+                    <p>Je n'ai pas de compte professionnel</p>
+                </button>
+                <button className={" btn btn-primary boutonCreateUser"} onClick = {(e)=>this.redirectToClientPage()}>
+                    <p>Je souhaite utiliser mon véhicule personnel</p>
+                </button>
+            </div>
         </form>
     </div>
     
