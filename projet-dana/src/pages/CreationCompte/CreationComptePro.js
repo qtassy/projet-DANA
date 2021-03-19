@@ -81,7 +81,10 @@ export class CreationComptePro extends Component {
             
             fetch(url, requestOptions)
                 .then(response => response.json())
-                .then(data => this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel }))
+                .then(data => {
+                    this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel });
+                    window.location.href = "/login";
+                })
                 .catch(error => console.error(error));
         } else {
             this.setState({erreurMdp : "Les mots de passes ne correspondent pas"})
