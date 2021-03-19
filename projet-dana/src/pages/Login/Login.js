@@ -7,7 +7,7 @@ export class Login extends React.Component {
     constructor(){
       super();
       this.state = {
-          login : "leplubeau@gmail.com",
+          login : "leplusbeau@gmail.com",
           pass : "damien",
           valid: false
       };
