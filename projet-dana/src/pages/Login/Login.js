@@ -7,8 +7,8 @@ export class Login extends React.Component {
     constructor(){
       super();
       this.state = {
-          login : "",
-          pass : "",
+          login : "mail@jeanguy.fr",
+          pass : "test",
           valid: false
       };
       this.submit = this.submit.bind(this);
@@ -41,10 +41,11 @@ export class Login extends React.Component {
             }
         };
         var url = 'http://obiwan2.univ-brest.fr:7145/login'
+        localStorage.clear();
         fetch(url, requestOptions)
         .then(result => result.json())
         .then(result => {
-            console.log(result);
+            console.log("result : ", result);
             if(result.id === -1){
                 document.getElementById("etat").innerHTML = "Pas connecté !"
             }else{
@@ -52,7 +53,7 @@ export class Login extends React.Component {
                 // this.setState({valid : true})
                 localStorage.setItem("clientId", result.idClient);
                 localStorage.setItem("accountId", result.idCompte);
-                localStorage.setItem("accountType", result.typeCompte);
+                localStorage.setItem("accountType", result.type);
                 window.location.href = "/home";
             }
         });
@@ -65,11 +66,12 @@ export class Login extends React.Component {
     <div className={"centerLogin"} >
         <form className={"formulaire"} onSubmit={this.submit}>
             <div className={"identification"} >
-                <input type="text" name="login" onChange={this.changeLogin} required ></input>
+                <input type="text" name="login" onChange={this.changeLogin} required value= {this.state.login}></input>
                 <label htmlFor="login"> Nom d'utilisateur </label>
             </div>
             <div className={"identification"}> 
-                <input  className={"bottom"} type="text" name="pass" onChange={this.changePass} required></input>
+                <input  className={"bottom"} type="text" name="pass" onChange={this.changePass} 
+                value = {this.state.pass} required></input>
                 <label htmlFor="pass"> Mot de passe </label>
             </div>
             <p id="etat"></p>
