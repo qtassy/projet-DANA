@@ -7,8 +7,8 @@ export class Login extends React.Component {
     constructor(){
       super();
       this.state = {
-          login : "leplusbeau@gmail.com",
-          pass : "damien",
+          login : "",
+          pass : "",
           valid: false
       };
       this.submit = this.submit.bind(this);
