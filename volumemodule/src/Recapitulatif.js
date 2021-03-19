@@ -146,7 +146,7 @@ export class Recapitulatif extends React.Component {
                             [...this.state.recapitulatif.lstCategorie].map((x, i) => {
                                 return(
                                     <React.Fragment>
-                                        <div className={" m-2 justify-content-center row"} key={"titreCategorie-" + i}>
+                                        <div className={" m-3 justify-content-center row"} key={"titreCategorie-" + i}>
                                             <p className={"nomCat col-12"} key={"categorie-" + i} id={"categorie-" + i}>{x.categorie}</p>
                                         </div>
                                         {
