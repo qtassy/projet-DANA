@@ -1,58 +1,58 @@
 .elementFormCreationPieces {
-    text-align: center;
-    border-radius: 20px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center !important;
+    border-radius: 20px !important;
+    width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .formCreationPieces {
-    margin-top: 2%;
-    text-align: center;
+    margin-top: 2% !important;
+    text-align: center !important;
 }
 
 .nomPieces::placeholder {
-    color: #acb7b8;
+    color: #acb7b8 !important;
 }
 
 #validerFormCreationPieces, .ajoutSuppr {
-    background-color: #FF7276;
-    border-color: #FF7276;
-    color : white;
+    background-color: #FF7276 !important;
+    border-color: #FF7276 !important;
+    color : white !important;
 }
 
 #validerFormCreationPieces, #annulerFormCreationPieces {
-    background-color: #FF7276;
-    border-color: #FF7276;
-    color : white;
-    width: 150px;
+    background-color: #FF7276 !important;
+    border-color: #FF7276 !important;
+    color : white !important;
+    width: 150px !important;
 }
 
 @media screen and (max-width: 299px) {
     #validerFormCreationPieces {
-        margin-top: 20px;
+        margin-top: 20px !important;
     }
 }
 
 @media screen and (min-width: 301px) {
     #annulerFormCreationPieces {
-        margin-right: 20px;
+        margin-right: 20px !important;
     }
 }
 
 
 .ajoutSuppr {
-    border-radius: 100%;
-    width: 40px;
-    height: 40px;
-    padding-bottom: 20px;
-    vertical-align: middle;
-    margin: 0 10px;
+    border-radius: 100% !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding-bottom: 20px !important;
+    vertical-align: middle !important;
+    margin: 0 10px !important;
 }
 
 #validerFormCreationPieces:hover, .ajoutSuppr:hover, #validerFormCreationPieces:active, .ajoutSuppr:active,
 #annulerFormCreationPieces:hover, #annulerFormCreationPieces:active {
-    background-color: #44797B;
-    border-color: #44797B;
-    color : white;
+    background-color: #44797B !important;
+    border-color: #44797B !important;
+    color : white !important;
 }
