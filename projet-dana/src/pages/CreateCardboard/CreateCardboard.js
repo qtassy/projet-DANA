@@ -146,7 +146,10 @@ class CreateCardboard extends React.Component{
   }
   
   getRooms= () =>{
-    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/4/3 "
+    let origin = localStorage.getItem("origin");
+    let destination = localStorage.getItem("destination");
+    let url = "http://obiwan2.univ-brest.fr:7144/lstPiece/" +origin + "/" + destination;
+
 
     var options = {
       method: 'GET',
