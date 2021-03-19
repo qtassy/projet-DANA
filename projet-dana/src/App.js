@@ -7,6 +7,11 @@ import Home from './pages/Home/Home';
 import MyCardboards from './pages/MyCardboards/MyCardboards';
 import ListCardboardByRoom from './pages/ListCardboardByRoom/ListCardboardByRoom';
 import CreateCardboard from './pages/CreateCardboard/CreateCardboard'
+import ListeEtiquettes from './pages/Etiquettes/ListeEtiquettes';
+import CreationCompteClient from './pages/CreationCompte/CreationCompteClient';
+import CreationComptePro from './pages/CreationCompte/CreationComptePro';
+import CreationPieces from './pages/CreationPieces/CreationPieces';
+import CreationProjetDemenagement from './pages/CreationProjetDemenagement/CreationProjetDemenagement';
 
 function App() {
   return (
@@ -19,6 +24,12 @@ function App() {
       <Route exact path="/MakeMyCardboards/myCardBoards" component={MyCardboards} />
       <Route exact path="/MakeMyCardboards/myCardBoards/createCardboard" component={CreateCardboard} />
       <Route exact path="/MakeMyCardboards/myCardBoards/room" component={ListCardboardByRoom} />
+
+      <Route exact path="/Etiquettes" component={ListeEtiquettes} />
+      <Route exact path="/CreationCompteClient" component={CreationCompteClient} />
+      <Route exact path="/CreationComptePro" component={CreationComptePro} />
+      <Route exact path="/CreationPieces" component={CreationPieces} />
+      <Route exact path="/CreationProjetDemenagement" component={CreationProjetDemenagement} />
 
       {/* Module Transport */}
       {/* <Route exact path="/Transport" component={Transport} /> */}
