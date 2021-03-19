@@ -15,6 +15,7 @@ export class CreationPieces extends Component {
         this.ajouterNomPiece = this.ajouterNomPiece.bind(this);
         this.supprimerNomPiece = this.supprimerNomPiece.bind(this);
         this.valider = this.valider.bind(this);
+        this.annuler = this.annuler.bind(this);
     }
 
     setNomPiece(event, index) {
@@ -60,11 +61,17 @@ export class CreationPieces extends Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({pieces : this.state.pieces, idLogement : 4})
+            body: JSON.stringify({pieces : this.state.pieces, idLogement : localStorage.getItem(this.props.idLogement)})
         };
         
         fetch(url, requestOptions)
         .catch(error => console.error(error));
+
+        window.location.href = this.props.redirect
+    }
+
+    annuler() {
+        window.location.href = localStorage.getItem("lienBoutonAnnulation")
     }
 
     render() {
@@ -75,7 +82,7 @@ export class CreationPieces extends Component {
                             <div className={"form-group"} key={"clePiece-" + index}>
                                 <input
                                     type={"text"} className={"form-control elementFormCreationPieces nomsPieces"} id={"nomPiece-" + index}
-                                    aria-describedby={"nom"} placeholder={"NOM"} 
+                                    aria-describedby={"nom"} placeholder={"Nom"} 
                                     onChange={(e) => this.setNomPiece(e, index)}
                                     required value={this.state.nom}
                                 />
@@ -90,6 +97,10 @@ export class CreationPieces extends Component {
                         </div>
                         
                         <div className={"form-group"}>
+                            <button type="button" className={"btn elementFormCreationPieces"}
+                                onClick={this.annuler} id={"annulerFormCreationPieces"}>
+                                    {localStorage.getItem("texteBoutonAnnulation")}</button>
+
                             <button type="submit" className={"btn elementFormCreationPieces"}
                                     id={"validerFormCreationPieces"}>Valider</button>
                         </div>

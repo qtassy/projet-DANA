@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './CreationProjetDemenagement.css'
-
+import {httpRequest} from '../../services/httpRequestService';
 export class CreationProjetDemenagement extends Component {
     constructor(props) {
         super(props);
@@ -65,10 +65,11 @@ export class CreationProjetDemenagement extends Component {
     }
 
     valider(event) {
+        console.log("validation");
         event.preventDefault();
         const url = 'http://obiwan2.univ-brest.fr:7144/ajtDemenagement'
 
-        // TODO : récupérer l'id du client dynamiquement
+        // TODO : récupérer l'id du client dynamiquent
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -77,8 +78,21 @@ export class CreationProjetDemenagement extends Component {
                                     idClient : 1})
         };
         
-        fetch(url, requestOptions)
-        .catch(error => console.error(error));
+        console.log("before http" )
+        httpRequest(url, requestOptions).
+        then(response => {
+            console.log("response : " + response);
+            localStorage.setItem("origin", response.origin);
+            localStorage.setItem("destination", response.destination);
+            localStorage.setItem("texteBoutonAnnulation", "Ajouter plus tard");
+            localStorage.setItem("lienBoutonAnnulation", "/CreationPiecesFutur");
+            window.location.href = "/CreationPiecesOrigine";
+        }) 
+        .catch(error => {
+            console.error(error)
+            alert("Erreur")
+            window.location.href = "/home"
+        });
     }
 
     render() {
@@ -98,15 +112,17 @@ export class CreationProjetDemenagement extends Component {
 
                     <div className={"form-group"}>
                         <input type="text" 
-                            className={"form-control elementFormConnaissance"} id={"adresseActuelle"} aria-describedby={"adresseActuelle"}
-                            placeholder={"Adresse de votre logement actuel"} value={this.state.adresseActuelle} 
+                            className={"form-control elementFormConnaissance"} id={"adresseActuelle"}
+                            aria-describedby={"adresseActuelle"} placeholder={"Adresse de votre logement actuel"}
+                            value={this.state.adresseActuelle} 
                             onChange={this.setAdresseActuelle}/>
                     </div>
 
                     <div className={"form-group"}>
                         <input type="text" 
                             className={"form-control elementFormConnaissance"} id={"adresseFutur"} aria-describedby={"adresseFutur"}
-                            placeholder={"Adresse de votre futur logement"} value={this.state.adresseFutur} onChange={this.setAdresseFutur}/>
+                            placeholder={"Adresse de votre futur logement"} value={this.state.adresseFutur}
+                            onChange={this.setAdresseFutur}/>
                     </div>
 
                     <button type="submit" className={"btn elementFormConnaissance"} id={"validerFormConnaissance"}>Valider</button>

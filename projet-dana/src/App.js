@@ -10,9 +10,11 @@ import CreateCardboard from './pages/CreateCardboard/CreateCardboard'
 import ListeEtiquettes from './pages/Etiquettes/ListeEtiquettes';
 import CreationCompteClient from './pages/CreationCompte/CreationCompteClient';
 import CreationComptePro from './pages/CreationCompte/CreationComptePro';
-import CreationPieces from './pages/CreationPieces/CreationPieces';
 import CreationProjetDemenagement from './pages/CreationProjetDemenagement/CreationProjetDemenagement';
-
+import CreationPiecesOrigine from './pages/CreationPieces/CreationPieceOrigine';
+import CreationPiecesFutur from './pages/CreationPieces/CreationPieceFutur';
+import CalculateurVolume from './pages/CalculateurVolume/CalculateurVolume';
+import Recapitulatif from './pages/Recapitulatif/Recapitulatif';
 function App() {
   return (
     <BrowserRouter>
@@ -26,10 +28,17 @@ function App() {
       <Route exact path="/MakeMyCardboards/myCardBoards/room" component={ListCardboardByRoom} />
 
       <Route exact path="/Etiquettes" component={ListeEtiquettes} />
+
       <Route exact path="/CreationCompteClient" component={CreationCompteClient} />
       <Route exact path="/CreationComptePro" component={CreationComptePro} />
-      <Route exact path="/CreationPieces" component={CreationPieces} />
+
+      <Route exact path="/CreationPiecesOrigine" component={CreationPiecesOrigine} />
+      <Route exact path="/CreationPiecesFutur" component={CreationPiecesFutur} />
       <Route exact path="/CreationProjetDemenagement" component={CreationProjetDemenagement} />
+      
+      <Route exact path="/CalculateurVolume" component={CalculateurVolume} />
+      <Route exact path="/Recapitulatif" component={Recapitulatif} />
+
 
       {/* Module Transport */}
       {/* <Route exact path="/Transport" component={Transport} /> */}

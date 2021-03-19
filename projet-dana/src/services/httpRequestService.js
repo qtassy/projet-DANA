@@ -1,4 +1,5 @@
 function httpRequest(url, options) {
+    console.log("url", options);
     return new Promise((resolve, reject) => {
         fetch(url, options).then(response => {
             if (response.status === 200) {

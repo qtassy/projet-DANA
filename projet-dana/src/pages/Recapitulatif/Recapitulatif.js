@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImages } from '@fortawesome/free-solid-svg-icons'
+import { faImages, faWindowRestore } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -191,7 +191,7 @@ export class Recapitulatif extends React.Component {
             response.json().then(infos => {
                 console.log(infos);
                 localStorage.removeItem("Recapitulatif");
-                //Mettre la redirection vers la page d'accueil
+                window.location.href = "/home"
             });
         });
     }

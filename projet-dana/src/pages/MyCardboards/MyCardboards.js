@@ -28,7 +28,8 @@ class MyCardboards extends React.Component {
     // this.state.roomList = data;
     // console.log("state: ", this.state);
 
-    var url = "http://obiwan2.univ-brest.fr:7144/nbCartons/4";
+    var url = "http://obiwan2.univ-brest.fr:7144/nbCartons/" + 
+    localStorage.getItem("origin");
 
     var options = {
       method: 'GET',

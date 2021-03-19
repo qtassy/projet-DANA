@@ -7,8 +7,8 @@ export class Login extends React.Component {
     constructor(){
       super();
       this.state = {
-          login : "leplubeau@gmail.com",
-          pass : "damien",
+          login : "",
+          pass : "",
           valid: false
       };
       this.submit = this.submit.bind(this);
@@ -59,6 +59,17 @@ export class Login extends React.Component {
         });
     }
 
+    redirectToProPage(){
+        console.log("redirection to Pro page ");
+        window.location.href = "/CreationComptePro"
+    }
+
+    redirectToClientPage(){
+        console.log("redirection to Pro page ");
+        window.location.href = "/CreationCompteClient"
+    }
+
+
     render(){
         
     return(
@@ -76,6 +87,8 @@ export class Login extends React.Component {
             </div>
             <p id="etat"></p>
             <button className={"submit"} id="submit" type="submit">Connexion</button>
+            <button type="button" class="btn btn-light" onClick = {(e)=>this.redirectToClientPage()}>Je n'ai pas de compte utilisateur </button>
+            <button type="button" class="btn btn-light" onClick = {(e)=>this.redirectToProPage()}>Je n'ai pas de compte professionnel</button>
 
         </form>
     </div>

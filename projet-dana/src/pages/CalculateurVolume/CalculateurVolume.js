@@ -5,7 +5,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import './CalculateurVolume.scss'
-import Resume from './Resume';
+import Resume from '../../components/Resume';
 const fetch = require('node-fetch');
 
 class App extends React.Component {
@@ -107,7 +107,7 @@ class App extends React.Component {
     })
  
     var unselectedButton = document.getElementById("btnCategorie"+this.state.categorie);
-    unselectedButton.classList.remove("Actif");
+    unselectedButton.classList.rResumeemove("Actif");
     console.log(this.state.categorie)
     console.log(e.target.value)
     await this.setState({ categorie: e.target.value });
@@ -227,7 +227,7 @@ class App extends React.Component {
       lstCategorie : []
     };
     var nouvelleListeObjets = [];
-    nouveauRecap.idClient = localStorage.getItem("idUtilisateur");
+    nouveauRecap.idClient = localStorage.getItem("clientId");
     nouveauRecap.nbElements = data.nbElements;
     nouveauRecap.surface = data.surface;
     this.state.recapitulatif.forEach(element => {
