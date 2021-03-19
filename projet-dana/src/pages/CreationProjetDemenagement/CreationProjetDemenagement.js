@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import './CreationProjetDemenagement.css'
 import {httpRequest} from '../../services/httpRequestService';
+import NavMyCardboard from '../../components/Menu/NavMyCardboard';
+
 export class CreationProjetDemenagement extends Component {
     constructor(props) {
         super(props);
@@ -81,11 +83,12 @@ export class CreationProjetDemenagement extends Component {
         console.log("before http" )
         httpRequest(url, requestOptions).
         then(response => {
-            console.log("response : " + response);
+            // On prépare les informations pour le formulaire 
             localStorage.setItem("origin", response.origin);
             localStorage.setItem("destination", response.destination);
             localStorage.setItem("texteBoutonAnnulation", "Ajouter plus tard");
             localStorage.setItem("lienBoutonAnnulation", "/CreationPiecesFutur");
+
             window.location.href = "/CreationPiecesOrigine";
         }) 
         .catch(error => {
@@ -98,6 +101,7 @@ export class CreationProjetDemenagement extends Component {
     render() {
         return (
             <div className={"formConnaissance"}>
+                <h1>Faisons Connaissance</h1>
                 <form onSubmit={this.valider}>
                     <div className={"form-group"}>
                         <input type="text" className={"form-control elementFormConnaissance"} id={"nomProjet"}

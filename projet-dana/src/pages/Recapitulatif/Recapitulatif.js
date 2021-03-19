@@ -201,7 +201,7 @@ export class Recapitulatif extends React.Component {
             <React.Fragment>
                 <div className={"top row"}>
                     <div className={"col"}>
-                        <p className={"Title"}><a href="/"><FontAwesomeIcon className={"mt-5 mx-2"} icon={faChevronLeft} /></a> Récapitulatif</p>
+                        <p className={"Title"}><a href="/CalculateurVolume"><FontAwesomeIcon className={"mt-5 mx-2"} icon={faChevronLeft} /></a> Récapitulatif</p>
                     </div>
                 </div>
                 <div className={"container"}>
