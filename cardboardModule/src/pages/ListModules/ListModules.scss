@@ -8,7 +8,15 @@
         color: white;
     }
 }
-  
+
+.link-module{
+
+  &, &:hover{
+    color: initial;
+    text-decoration: none;
+  }
+}
+
 .card-module{
 background-color: #F6F6F6;
 border: none;

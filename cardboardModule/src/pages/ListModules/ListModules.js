@@ -26,25 +26,25 @@ class Module extends React.Component{
     render(){
         return(
             <div className="col-xs-12 col-md-6">
-                <div className="card card-module mb-5">
-                    <div className="row">
-                        <div className="col-4">
-                            <div className="round-info">
-                                <TiInfoLarge className="icon-info"/>
+                <Link to={this.props.link} className="link-module">
+                    <div className="card card-module mb-5">
+                        <div className="row">
+                            <div className="col-4">
+                                <div className="round-info">
+                                    <TiInfoLarge className="icon-info"/>
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-8">
-                            <div className="card-body">
-                                <p className="card-text mb-0">{this.props.text}</p>
-                                <a href={this.props.link} className="link-round">
-                                    <div className="round-module">
-                                        <IoIosArrowForward className="arrow-module"/>
-                                    </div>
-                                </a>
+                            <div className="col-8">
+                                <div className="card-body">
+                                    <p className="card-text mb-0">{this.props.text}</p>
+                                        <div className="round-module">
+                                            <IoIosArrowForward className="arrow-module"/>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             </div>
         )
     }

@@ -69,7 +69,11 @@ class MyCardboards extends React.Component {
             {console.log(this.getState)}
             {
               this.getState().roomList.map((room, index) => 
-              <Piece  key={index} number = {room.nb} roomName = {room.libelle}/>
+              <Piece  
+              key={index} 
+              number = {room.nb} 
+              roomName = {room.libelle}
+              />
             )}
           </div>
         </div>
