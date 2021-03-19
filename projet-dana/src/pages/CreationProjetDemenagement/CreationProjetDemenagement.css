@@ -1,24 +1,24 @@
 .elementFormConnaissance {
-    text-align: center;
-    border-radius: 20px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center !important;
+    border-radius: 20px !important;
+    width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .formConnaissance {
-    margin-top: 2%;
-    text-align: center;
+    margin-top: 2% !important;
+    text-align: center !important;
 }
 
 #validerFormConnaissance {
-    background-color: #FF7276;
-    border-color: #FF7276;
-    color: white;
+    background-color: #FF7276 !important;
+    border-color: #FF7276 !important;
+    color: white !important;
 }
 
 #validerFormConnaissance:hover, #validerFormConnaissance:active {
-    background-color: #44797B;
-    border-color: #44797B;
-    color: white;
+    background-color: #44797B !important;
+    border-color: #44797B !important;
+    color: white !important;
 }
