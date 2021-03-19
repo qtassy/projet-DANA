@@ -18,8 +18,6 @@ export class CreationPieces extends Component {
     }
 
     setNomPiece(event, index) {
-        console.log("setNomPiece")
-
         // 1. On fait une copie superficielle des éléments
         let pieces = [...this.state.pieces];
 
@@ -28,6 +26,9 @@ export class CreationPieces extends Component {
 
         // 3. On remplace la propriété qui nous intéresse
         piece.nom = event.target.value;
+
+        // On met la première lettre en majuscule et les autres en minuscule
+        piece.nom = piece.nom.charAt(0).toUpperCase() + piece.nom.slice(1).toLowerCase();
 
         // 4. On met à jour l'objet dans notre tableau. nous modifions le tableau ici, 
         //    c'est pourquoi nous avons d'abord fait une copie
@@ -73,11 +74,12 @@ export class CreationPieces extends Component {
                         {this.state.pieces.map((piece, index) => 
                             <div className={"form-group"} key={"clePiece-" + index}>
                                 <input
-                                    type={"text"} className={"form-control elementFormCreationPieces nomsPieces"} id={"nomPiece-" + piece.id}
+                                    type={"text"} className={"form-control elementFormCreationPieces nomsPieces"} id={"nomPiece-" + index}
                                     aria-describedby={"nom"} placeholder={"NOM"} 
                                     onChange={(e) => this.setNomPiece(e, index)}
                                     required value={this.state.nom}
                                 />
+                                <p>{piece.nom}</p>
                             </div>
                         )}
 

@@ -85,11 +85,9 @@ class CreateCardboard extends React.Component{
       return;
     }
     let val = parseInt(key);
-    
-    this.setState({selectedOrigin:val});
+    this.state.selectedOrigin = val;
     this.state.cardboard.pieceOrigine = this.state.originRoomList[val].id;
-    console.log("state : ", this.state);
-    
+    console.log(this.state);
   }
 
   changeDestinationRoom(key){

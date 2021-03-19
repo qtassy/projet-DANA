@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTruck } from '@fortawesome/free-solid-svg-icons'
 
 export class Resume extends React.Component{
     constructor(props){
@@ -33,18 +35,23 @@ export class Resume extends React.Component{
 
     render(){
         return(
-            <div id="block-resume">
-                <div id="block-nbElements">
-                    <p id="nbElement">{this.state.nbElements}</p>
-                    <p id="label-nbElements">Eléments</p>
+            <React.Fragment>
+                <div className={"col-4 my-3 text-center"} id="block-nbElements">
+                    <div className={"row"}>
+                    <span id="nbElement">{this.state.nbElements}</span>
+                    <span id="label-nbElements">Eléments</span>
+                    </div>
                 </div>
-                <div id="block-surface">
-                    <p id="surface">{this.state.surface + "m3"}</p>
-                    <p id="label-surface">Surface</p>
+                <div className={"col-4 my-3 text-center"}id="block-surface">
+                    <div className={"row"}>
+                    <span id="surface">{this.state.surface + "m³"}</span>
+                    <span id="label-surface">Surface</span>
+                    </div>
                 </div>
-                <input type="button" id="btn-resume" onClick={this.submit}/>
-                <p></p>
-            </div>
+                <div className={"col-4 my-3 text-center"}id="block-surface">
+                <button className={"btn btn-content camionResume"} type="button" id="btn-resume" onClick={this.submit}> <FontAwesomeIcon  icon={faTruck} /></button>
+                </div>
+            </React.Fragment>
         )
     }
 }
