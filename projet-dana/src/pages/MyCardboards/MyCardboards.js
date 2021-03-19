@@ -56,14 +56,14 @@ class MyCardboards extends React.Component {
       <div className="MyCardboards">
         <NavMyCardboards link="/MakeMyCardboards" />
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-6">
               <button className="btn btn-add-card1 mb-5">Ajouter une piece d'origine</button>
             </div>
             <div className="col-6">
               <button className="btn btn-add-card2 mb-5">Ajouter une piece de destination</button>
             </div>
-          </div>
+          </div> */}
           <div className="row">
             <div className="col-4 col-md-3">
               <div id="add-button">
