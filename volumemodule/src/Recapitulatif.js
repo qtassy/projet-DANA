@@ -136,7 +136,7 @@ export class Recapitulatif extends React.Component {
         return(
             <div className={"container"}>
                 <div className={"top row"}>
-                    <div className={"col-12"}>
+                    <div className={"col"}>
                         <p className={"Title"}><FontAwesomeIcon className={"mt-5 mx-2"} icon={faChevronLeft} /> Récapitulatif</p>
                     </div>
                 </div>
@@ -153,22 +153,24 @@ export class Recapitulatif extends React.Component {
                                             x.lstObjets.map((y, j) => {
                                                 return(
                                                     <div className={"row borderBot"} key={"blockCategorie-" + j}>
-                                                        <div className="col-2">
-                                                            <FontAwesomeIcon key={"img-" + j} icon={faImages} />
+                                                        <div className="col-2  centerImg">
+                                                            <FontAwesomeIcon className={"imgRecap "} key={"img-" + j} icon={faImages} />
                                                         </div>
                                                         <div className="col-4">
                                                             <p key={"nom-" + j} id={"nom-" + y.libelle}>{y.libelle}</p>
                                                             <p key={"dimention-" + j} id={"dimention-" + y.libelle}>{"Dim : ...x..."}</p>
                                                         </div>
-                                                        <div className="col-2" key={"calcul-" + j}>
-                                                            <span key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
+                                                        <div className="col-3 justify-content-center centerDot" key={"calcul-" + j}>
+                                                            <p class="dot text-center justify-content-center ">
+                                                                <span  key={"quantite-" + j} id={"quantite-" + y.libelle}>{y.quantite}</span>
+                                                            </p>
                                                         </div>
-                                                        <div className="col-2">
-                                                            <button className={"btn btn-primary incrementButtonRecap"} key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + x.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
-                                                            <button className={"btn btn-primary incrementButtonRecap"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
+                                                        <div className="col-2 justify-content-center boutonRecapIncrem ">
+                                                            <button className={"btn btn-primary incrementButtonRecap m-2 "} key={"moins-" + j} id={"btnMoins-" + x.categorie + "-" + y.libelle} value="-" onClick={e => this.onClickMoins(e)} ><FontAwesomeIcon id={"btnMoins^" + y.libelle} icon={faMinus} onClick={e => this.onClickSVGMoins(e)} /></button>
+                                                            <button className={"btn btn-primary incrementButtonRecap m-2"} key={"plus-" + j} id={"btnPlus-" + x.categorie + "-" + y.libelle} value="+" onClick={e => this.onClickPlus(e)} ><FontAwesomeIcon icon={faPlus} id={"btnPlus^" + y.libelle} onClick={e => this.onClickSVGPlus(e)} /></button>
                                                         </div>
-                                                        <div className="col-2">    
-                                                            <button className={"btn btn-primary suppresionButtonRecap"} key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + x.libelle} onClick={e => this.onClickSuppr(e)} /></button>
+                                                        <div className="col-1 justify-content-center boutonRecapSupp" >    
+                                                            <button className={"btn btn-primary suppresionButtonRecap"} key={"suppr-" + j} id={"btnSuppr-" + x.categorie + "-" + y.libelle} value="x" onClick={e => this.onClickSuppr(e)} > <FontAwesomeIcon icon={faTimes} id={"btnPlus^" + y.libelle} onClick={e => this.onClickSuppr(e)} /></button>
                                                         </div>
                                                     </div>
                                                 )
@@ -182,12 +184,20 @@ export class Recapitulatif extends React.Component {
                         }
                     </div>
                 </div>
-                <button  id="boutonValider" onClick={this.valider} >
-                    <span>Cette suggestion me convient</span>
-                </button>
-                <button  id="boutonAutre" onClick={this.valider} >
-                    <span>Je souhaite utiliser mon véhicule personnel</span>
-                </button>
+                <div className={"row text-center mt-3"}>
+                    <div className={"col m-2"}>
+                        <button className={"btn btn-primary boutonRecapValider"} id="boutonValider" onClick={this.valider} >
+                            <p className={"labelValidation px-4"}>Cette suggestion me convient</p>
+                        </button>
+                    </div>
+                </div>
+                <div className={"row text-center"}>
+                    <div className={"col "}>
+                    <button className={"btn btn-primary boutonRecapPerso"} id="boutonAutre" onClick={this.valider} >
+                        <p>Je souhaite utiliser mon véhicule personnel</p>
+                    </button>
+                    </div>
+                </div>
             </div>
         )
     }
