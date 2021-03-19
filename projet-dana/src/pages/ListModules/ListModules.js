@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./ListModules.scss";
 import { TiInfoLarge } from "react-icons/ti";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward, IoLogoWindows } from "react-icons/io";
 import { MdChevronLeft } from "react-icons/md";
+import {httpRequest} from '../../services/httpRequestService';
 
 class Jumbotron extends React.Component{
     render(){
@@ -36,7 +37,7 @@ class Module extends React.Component{
                         <div className="col-8">
                             <div className="card-body">
                                 <p className="card-text mb-0">{this.props.text}</p>
-                                <a href={this.props.link} className="link-round">
+                                <a onClick = {(e)=>this.props.traitement()} className="link-round">
                                     <div className="round-module">
                                         <IoIosArrowForward className="arrow-module"/>
                                     </div>
@@ -51,13 +52,38 @@ class Module extends React.Component{
 }
 
 class MakeMyCardboards extends React.Component{
+    getDemenagement =() =>{
+        let url = "http://obiwan2.univ-brest.fr:7144/getDemenagement/" +
+         localStorage.getItem("accountId");
+    
+        var options = {
+          method: 'GET',
+          body: null,
+          headers: { 'Content-Type': 'application/json' }
+        }
+    
+        httpRequest(url, options).then(response=> {
+          console.log("Origine/destination : ", response);
+
+          //if reponse is an empty object 
+          if(Object.keys(response).length === 0){
+            window.location.href = "/CreationProjetDemenagement";
+          }else{
+              localStorage.setItem("origin", response.origin);
+              localStorage.setItem("destination", response.destination);
+              window.location.href = "/MakeMyCardboards/myCardBoards"
+
+          }
+        //   return response;
+        })
+    }
     render(){
         return(
             <>
                 <Jumbotron title="Faire ses cartons"/>
                 <div className="container">
                     <div className="row">
-                        <Module text="Préparer ses cartons" link="/MakeMyCardboards/myCardBoards" />
+                        <Module text="Préparer ses cartons" traitement = {this.getDemenagement} /*link="/MakeMyCardboards/myCardBoards"*/ />
                         <Module text="Acheter un pack de déménagement" link="#" />
                         <Module text="Louer un pack de déménagement" link="#" />
                     </div>

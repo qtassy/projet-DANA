@@ -1,8 +1,8 @@
 import React from 'react';
-import './cameraModal.scss';
+import './CameraModal.scss';
 
 
-const cameraModal = ({ handleClose, show, children }) => {
+const CameraModal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   return (
@@ -18,4 +18,4 @@ const cameraModal = ({ handleClose, show, children }) => {
   );
 };
 
-export default cameraModal;
+export default CameraModal;

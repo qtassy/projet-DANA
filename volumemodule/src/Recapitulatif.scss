@@ -8,6 +8,7 @@
     background-color: white;
     width:100%;
     top: 0;
+    margin : unset !important;
 
 }
 
@@ -22,7 +23,7 @@
 
 .mt-perso{
     margin-top : 7rem !important;
-
+    padding-left: 10px !important;
 }
 
 .incrementButtonRecap{
@@ -85,6 +86,8 @@
 
 .boutonRecapSupp{
     margin: auto !important;
+    display: grid;
+
 }
 
 
@@ -111,10 +114,13 @@
     border-color: white !important;
     color: #7c7d7e !important;
     p{
-        width:80%;
         margin: auto  !important;
         font-family: 'Roboto', sans-serif;
         font-size:18px;
         letter-spacing: 0.5px; 
     }
+}
+
+a, a:active, a:checked,a:focus, a:active:focus, a:visited{
+    color:black;
 }
