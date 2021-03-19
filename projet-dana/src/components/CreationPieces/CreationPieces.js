@@ -57,14 +57,17 @@ export class CreationPieces extends Component {
 
         const url = 'http://obiwan2.univ-brest.fr:7144/ajtPieces'
 
+        // TODO : recuperer l'id du logement dynamiquement
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({pieces : this.state.pieces, idLogement : 4})
+            body: JSON.stringify({pieces : this.state.pieces, idLogement : localStorage.getItem(this.props.idLogement)})
         };
         
         fetch(url, requestOptions)
         .catch(error => console.error(error));
+
+        window.location.href = this.props.redirect
     }
 
     render() {

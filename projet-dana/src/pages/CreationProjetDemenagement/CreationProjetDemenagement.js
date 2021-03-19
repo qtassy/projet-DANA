@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './CreationProjetDemenagement.css'
-
+import {httpRequest} from '../../services/httpRequestService';
 export class CreationProjetDemenagement extends Component {
     constructor(props) {
         super(props);
@@ -68,7 +68,7 @@ export class CreationProjetDemenagement extends Component {
         event.preventDefault();
         const url = 'http://obiwan2.univ-brest.fr:7144/ajtDemenagement'
 
-        // TODO : récupérer l'id du client dynamiquement
+        // TODO : récupérer l'id du client dynamiquent
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -77,8 +77,18 @@ export class CreationProjetDemenagement extends Component {
                                     idClient : 1})
         };
         
-        fetch(url, requestOptions)
-        .catch(error => console.error(error));
+        httpRequest(url, requestOptions).
+        then(response => {
+            console.log("response : " + response);
+            // localStorage.setItem("origin", response.origin);
+            // localStorage.setItem("destination", response.destination);
+            // window.location.href = "/CreationPiecesOrigine"
+        }) 
+        .catch(error => {
+            console.error(error)
+            alert("Erreur")
+            window.location.href = "/home"
+        });
     }
 
     render() {
