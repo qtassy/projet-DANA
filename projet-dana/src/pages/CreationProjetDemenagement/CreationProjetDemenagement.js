@@ -65,6 +65,7 @@ export class CreationProjetDemenagement extends Component {
     }
 
     valider(event) {
+        console.log("validation");
         event.preventDefault();
         const url = 'http://obiwan2.univ-brest.fr:7144/ajtDemenagement'
 
@@ -77,12 +78,13 @@ export class CreationProjetDemenagement extends Component {
                                     idClient : 1})
         };
         
+        console.log("before http" )
         httpRequest(url, requestOptions).
         then(response => {
             console.log("response : " + response);
-            // localStorage.setItem("origin", response.origin);
-            // localStorage.setItem("destination", response.destination);
-            // window.location.href = "/CreationPiecesOrigine"
+            localStorage.setItem("origin", response.origin);
+            localStorage.setItem("destination", response.destination);
+            window.location.href = "/CreationPiecesOrigine";
         }) 
         .catch(error => {
             console.error(error)
