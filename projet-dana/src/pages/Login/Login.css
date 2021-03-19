@@ -65,7 +65,7 @@ font-size: 12px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     height: 38px;
     line-height: 38px;
-    width: 100px;
+    width: auto;
     border-radius: 19px;
     font-family: "Montserrat", sans-serif;
     background-color: #fbfbfb;
@@ -78,4 +78,20 @@ font-size: 12px;
     text-align : center;
     height:30px;
     color: red;
+}
+
+.boutonCreateUser{
+    background-color:white !important;
+    line-height:1.5rem !important;
+    border-color: white !important;
+    color: #7c7d7e !important;
+    text-align: center;
+}
+
+.boutonCreateUser     p{
+    margin: auto  !important;
+    font-family: 'Roboto', sans-serif;
+    font-size:18px;
+    letter-spacing: 0.5px; 
+
 }
