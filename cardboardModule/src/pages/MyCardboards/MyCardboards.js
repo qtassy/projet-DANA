@@ -36,16 +36,12 @@ class MyCardboards extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     }
 
-    console.log("requete")
     httpRequest(url, options).then(rooms=> {
-      console.log("response : " + rooms.pieces);
       this.setState({roomList : rooms.pieces});
-      console.log(this.state);
     });
   }
 
   getState(){
-    console.log(this.state);
     return this.state;
   }
 
@@ -66,7 +62,6 @@ class MyCardboards extends React.Component {
                 </a>
               </div>
             </div>
-            {console.log(this.getState)}
             {
               this.getState().roomList.map((room, index) => 
               <Piece  

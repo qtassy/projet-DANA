@@ -71,7 +71,6 @@ class ListCardboard extends React.Component{
     }
 
     getDim(longueur, largeur){
-
         return longueur + "x" + largeur;
     }
 
