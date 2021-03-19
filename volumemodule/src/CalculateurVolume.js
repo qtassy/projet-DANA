@@ -21,6 +21,11 @@ class App extends React.Component {
     this.child = null;
   }
 
+  /**
+   * Effectuer au montage du composant
+   * Demande les données des catégorie pour les affichers
+   * et créer le récapitulatif en propriété du composant.
+   */
   componentDidMount() {
     var url = "http://obiwan2.univ-brest.fr:7199/categorie";
     var options = {
@@ -87,6 +92,12 @@ class App extends React.Component {
   }
 
 
+  /**
+   * Appeler quand on clique sur le bouton d'une catégorie
+   * Change la catégorie courante et la liste d'objets courant dans la page.
+   * Sauvegarde l'ancienne liste d'objets dans le récapitulatif.
+   * @param {*} e input type button
+   */
   onClickCategorie = async (e) => {
     this.state.recapitulatif.forEach(element => {
       if (element.categorie === this.state.categorie) {
@@ -112,33 +123,36 @@ class App extends React.Component {
     })
   }
 
+  /**
+   * Appeler quand on clique sur le bouton - d'un objet.
+   * Récupère la liste courante d'objets et le nom de l'objet.
+   * Apelle la fonction decrementer()
+   * @param {*} e input type button
+   */
   onClickMoins = (e) => {
     var liste = this.state.listeActuelle;
     var nom = e.target.id;
-    ([...liste.lstObjets]).forEach(element => {
-      if (element.libelle === nom.split('^')[1]) {
-        element.quantite = element.quantite - 1 < 0 ? 0 : element.quantite -=1;
-        this.child.decrementer();
-      }
-    })
-    this.setState({ listeActuelle: liste });
+    this.decrementer(liste, nom);
   }
 
-  onClickSVGPlus = (e) => {
-    var liste = this.state.listeActuelle;
-    var nom = e.target.parentNode.parentNode.id;
-    ([...liste.lstObjets]).forEach(element => {
-      if (element.libelle === nom.split('^')[1]) {
-        element.quantite += 1;
-        this.child.incrementer();
-      }
-    })
-    this.setState({ listeActuelle: liste });
-  }
-
+  /**
+   * Appeler quand on clique sur le SVG du bouton - d'un objet.
+   * Récupère la liste courante d'objets et le nom de l'objet.
+   * Apelle la fonction decrementer()
+   * @param {*} e svg FontAwesom de l'input type button
+   */
   onClickSVGMoins = (e) => {
     var liste = this.state.listeActuelle;
     var nom = e.target.parentNode.parentNode.id;
+    this.decrementer(liste, nom);
+  }
+
+  /**
+   * Fonction qui décrémente la quantité d'un objet dans la liste courante d'objets
+   * @param {*} liste La liste d'objet courante : this.state.listeActuelle.
+   * @param {*} nom Le nom de l'objet
+   */
+  decrementer = (liste, nom) => {
     ([...liste.lstObjets]).forEach(element => {
       if (element.libelle === nom.split('^')[1]) {
         element.quantite = element.quantite - 1 < 0 ? 0 : element.quantite -=1;
@@ -148,9 +162,36 @@ class App extends React.Component {
     this.setState({ listeActuelle: liste });
   }
 
+  /**
+   * Appeler quand on clique sur le SVG du bouton + d'un objet.
+   * Récupère la liste courante d'objets et le nom de l'objet.
+   * Apelle la fonction incrementer()
+   * @param {*} e svg FontAwesom de l'input type button
+   */
+  onClickSVGPlus = (e) => {
+    var liste = this.state.listeActuelle;
+    var nom = e.target.parentNode.parentNode.id;
+    this.incrementer(liste, nom);
+  }
+
+  /**
+   * Appeler quand on clique sur le bouton + d'un objet.
+   * Récupère la liste courante d'objets et le nom de l'objet.
+   * Apelle la fonction incrementer()
+   * @param {*} e Input type button
+   */
   onClickPlus = (e) => {
     var liste = this.state.listeActuelle;
     var nom = e.target.id;
+    this.incrementer(liste, nom);
+  }
+
+  /**
+   * Fonction qui incrémente la quantité d'un objet dans la liste courante d'objets
+   * @param {*} liste La liste d'objet courante : this.state.listeActuelle.
+   * @param {*} nom Le nom de l'objet
+   */
+  incrementer = (liste, nom) => {
     ([...liste.lstObjets]).forEach(element => {
       if (element.libelle === nom.split('^')[1]) {
         element.quantite += 1;
@@ -160,10 +201,21 @@ class App extends React.Component {
     this.setState({ listeActuelle: liste });
   }
 
+  /**
+   * Définis un composant réact comme "enfant" et l'enregistre en propriété de la classe.
+   * Permet d'utiliser ses méthodes.
+   * @param {*} element Composant Resume
+   */
   setChild = element => {
     this.child = element;
   }
 
+  /**
+   * Fonction de validation du calculateur de volume (appelé par le composant fils Resume).
+   * Traite le récapitulatif en enlevant les objets vide et les catégorie qui n'ont aucun objet
+   * L'enregistre en variable session et redirige la page vers le composant Recapitulatif.
+   * @param {*} data Données venant du composant fils Resume
+   */
   submit = (data) => {
     this.state.recapitulatif.forEach(element => {
       if (element.categorie === this.state.categorie) {
@@ -175,7 +227,7 @@ class App extends React.Component {
       lstCategorie : []
     };
     var nouvelleListeObjets = [];
-    nouveauRecap.idClient = 1;
+    nouveauRecap.idClient = localStorage.getItem("idUtilisateur");
     nouveauRecap.nbElements = data.nbElements;
     nouveauRecap.surface = data.surface;
     this.state.recapitulatif.forEach(element => {
