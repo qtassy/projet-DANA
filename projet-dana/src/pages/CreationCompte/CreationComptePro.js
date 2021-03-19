@@ -65,26 +65,24 @@ export class CreationComptePro extends Component {
 
             this.setState({erreurMdp : ""})
 
-            console.log(this.formatterTelephone(this.state.telephone));
 
+            const url = 'http://obiwan2.univ-brest.fr:7145/ajtPro'
 
-            // const url = 'http://obiwan2.univ-brest.fr:7145/ajtPro'
-
-            // const requestOptions = {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //      body: JSON.stringify({ nomEntreprise : this.state.nomEntreprise,
-            //                             email : this.state.email,
-            //                             telephone : this.formatterTelephone(this.state.telephone),
-            //                             adresseEntreprise : this.state.adresseEntreprise,
-            //                             urlSite : this.state.urlSite,
-            //                             mdp : this.state.mdp})
-            // };
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                 body: JSON.stringify({ nomEntreprise : this.state.nomEntreprise,
+                                        email : this.state.email,
+                                        telephone : this.formatterTelephone(this.state.telephone),
+                                        adresseEntreprise : this.state.adresseEntreprise,
+                                        urlSite : this.state.urlSite,
+                                        mdp : this.state.mdp})
+            };
             
-            // fetch(url, requestOptions)
-            //     .then(response => response.json())
-            //     .then(data => this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel }))
-            //     .catch(error => console.error(error));
+            fetch(url, requestOptions)
+                .then(response => response.json())
+                .then(data => this.setState({ erreurMail: data.erreurMail, erreurTel : data.erreurTel }))
+                .catch(error => console.error(error));
         } else {
             this.setState({erreurMdp : "Les mots de passes ne correspondent pas"})
         }
