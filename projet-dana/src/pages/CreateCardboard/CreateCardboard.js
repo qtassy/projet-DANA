@@ -5,7 +5,7 @@ import {httpRequest} from '../../services/httpRequestService';
 import AvailableContent from '../../components/AvailableContent/AvailableContent';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import CameraModal from '../../components/CameraModal/CameraModal';
+// import cameraModal from '../../components/cameraModal/cameraModal';
 
 
 class CreateCardboard extends React.Component{
@@ -208,9 +208,9 @@ class CreateCardboard extends React.Component{
     return(
       <div className="container mt-3">
         <div className="row mb-4">
-         <CameraModal show={this.state.openModal} handleClose={!this.openModal}>
+         <cameraModal show={this.state.openModal} handleClose={!this.openModal}>
           <Camera onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } } />
-        </CameraModal>
+        </cameraModal>
         
           <div className="col-6">
             <div className="square">
