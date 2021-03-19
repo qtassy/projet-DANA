@@ -107,7 +107,7 @@ class App extends React.Component {
     })
  
     var unselectedButton = document.getElementById("btnCategorie"+this.state.categorie);
-    unselectedButton.classList.rResumeemove("Actif");
+    unselectedButton.classList.remove("Actif");
     console.log(this.state.categorie)
     console.log(e.target.value)
     await this.setState({ categorie: e.target.value });
